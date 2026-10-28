@@ -1,6 +1,7 @@
 var express = require('express'),
     async = require('async'),
     { Pool } = require('pg'),
+    path = require('path'),
     cookieParser = require('cookie-parser'),
     app = express(),
     server = require('http').Server(app),
@@ -18,7 +19,11 @@ io.on('connection', function (socket) {
 });
 
 var pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  connectionTimeoutMillis: 2000
+});
+pool.on('error', function(err) {
+  console.error('PostgreSQL pool error', {error: err.message, code: err.code});
 });
 
 async.retry(
@@ -63,12 +68,39 @@ function collectVotesFromResult(result) {
   return votes;
 }
 
+function queryVoteCounts(callback) {
+  pool.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    callback(null, collectVotesFromResult(result));
+  });
+}
+
 app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/views'));
 
 app.get('/', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/views/index.html'));
+});
+
+app.get('/api/results', function (req, res) {
+  queryVoteCounts(function(err, votes) {
+    if (err) {
+      console.error('Failed to read vote counts', {
+        error: err.message,
+        code: err.code
+      });
+      res.status(503).json({
+        error: 'database_unavailable',
+        service: 'result'
+      });
+      return;
+    }
+    res.json({a: votes.a, b: votes.b});
+  });
 });
 
 server.listen(port, function () {
@@ -85,3 +117,11 @@ app.get('/healthz', function(req, res) {
     res.json({status: 'ok', service: 'result'});
   });
 });
+
+module.exports = {
+  app: app,
+  server: server,
+  pool: pool,
+  collectVotesFromResult: collectVotesFromResult,
+  queryVoteCounts: queryVoteCounts
+};
