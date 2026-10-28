@@ -1,14 +1,8 @@
 FROM node:18-slim
 
-# add curl for healthcheck
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl tini && \
-    rm -rf /var/lib/apt/lists/*
+# The delivery runner supplies Docker's init process and observes HTTP itself.
 
 WORKDIR /usr/local/app
-
-# have nodemon available for local dev use (file watching)
-RUN npm install -g nodemon
 
 COPY package*.json ./
 
@@ -21,5 +15,4 @@ COPY . .
 ENV PORT=80
 EXPOSE 80
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["node", "server.js"]
