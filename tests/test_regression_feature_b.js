@@ -5,13 +5,6 @@ const path = require('path');
 
 const CHECKPOINT_MS = 8000;
 
-// DELIBERATE REGRESSION R05 DEFECT (delivery round 1 only).
-// Card acceptance requires x * 3 + 2. The injected module returns x * 3 + 3,
-// which is exactly one above acceptance. These assertions record the injected
-// deviation; they are not acceptance and must not be used to claim it passes.
-const INJECTED_DEVIATION = 1;
-const ACCEPTANCE = {'-3': -7, '0': 2, '7': 23};
-
 function checkpoint(label, work) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
@@ -128,13 +121,12 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    for (const raw of Object.keys(ACCEPTANCE)) {
+    const expected = { '-3': -7, '0': 2, '7': 23 };
+    for (const raw of Object.keys(expected)) {
       const response = await requestJson(port, '/api/regression/b?x=' + raw);
       assert.strictEqual(response.status, 200, output());
       assert.ok(String(response.contentType).includes('application/json'));
-      const injected = ACCEPTANCE[raw] + INJECTED_DEVIATION;
-      assert.deepStrictEqual(response.json, { feature: 'b', value: injected });
-      assert.notStrictEqual(response.json.value, ACCEPTANCE[raw]);
+      assert.deepStrictEqual(response.json, { feature: 'b', value: expected[raw] });
     }
 
     const invalid = await requestJson(port, '/api/regression/b?x=1.5');
@@ -154,7 +146,7 @@ async function main() {
     assert.ok(home.body.includes('Cats vs Dogs'));
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
-  console.log('result regression feature b self-tests passed; injected +1 deviation recorded, acceptance not claimed');
+  console.log('result regression feature b self-tests passed');
 }
 
 main().catch((err) => {
