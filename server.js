@@ -75,3 +75,13 @@ server.listen(port, function () {
   var port = server.address().port;
   console.log('App running on port ' + port);
 });
+
+app.get('/healthz', function(req, res) {
+  pool.query('SELECT 1', function(err) {
+    if (err) {
+      console.error('PostgreSQL readiness check failed', err);
+      return res.status(503).json({status: 'unavailable', service: 'result'});
+    }
+    res.json({status: 'ok', service: 'result'});
+  });
+});
