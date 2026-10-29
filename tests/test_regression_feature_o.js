@@ -5,11 +5,7 @@ const path = require('path');
 
 const CHECKPOINT_MS = 8000;
 
-// DELIBERATE TEST INPUT. Card acceptance requires value = x + 107
-// (-3 -> 104, 0 -> 107, 7 -> 114). Delivery round 1 injects +1 in the real
-// source, so this suite asserts the injected values and must not be read as
-// acceptance passing. Independent HTTP acceptance is expected to fail.
-const INJECTED_VALUE = { '-3': 105, '0': 108, '7': 115 };
+const EXPECTED_VALUE = { '-3': 104, '0': 107, '7': 114 };
 
 function checkpoint(label, work) {
   return new Promise((resolve, reject) => {
@@ -127,11 +123,11 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    for (const raw of Object.keys(INJECTED_VALUE)) {
+    for (const raw of Object.keys(EXPECTED_VALUE)) {
       const response = await requestJson(port, '/api/regression/o?x=' + raw);
       assert.strictEqual(response.status, 200, output());
       assert.ok(String(response.contentType).includes('application/json'));
-      assert.deepStrictEqual(response.json, { feature: 'o', value: INJECTED_VALUE[raw] });
+      assert.deepStrictEqual(response.json, { feature: 'o', value: EXPECTED_VALUE[raw] });
     }
 
     const invalid = await requestJson(port, '/api/regression/o?x=1.5');
@@ -156,7 +152,7 @@ async function main() {
     assert.strictEqual(health.json.service, 'result');
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
-  console.log('result regression feature o self-tests passed; DELIBERATE +1 mismatch asserted, card acceptance x+107 expected to fail');
+  console.log('result regression feature o self-tests passed');
 }
 
 const hardStop = setTimeout(() => {
