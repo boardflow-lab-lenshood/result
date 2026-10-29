@@ -5,11 +5,6 @@ const path = require('path');
 
 const CHECKPOINT_MS = 8000;
 
-// DELIBERATE TEST DEFECT recorded by this independent module test:
-// the card formula is x + 114, but delivery_round 1 implements x + 115.
-const ORIGINAL_OFFSET = 114;
-const INJECTED_OFFSET = 115;
-
 function checkpoint(label, work) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
@@ -126,15 +121,12 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    const inputs = ['-3', '0', '7'];
-    for (const raw of inputs) {
+    const expected = { '-3': 111, '0': 114, '7': 121 };
+    for (const raw of Object.keys(expected)) {
       const response = await requestJson(port, '/api/regression/v?x=' + raw);
-      const input = Number(raw);
       assert.strictEqual(response.status, 200, output());
       assert.ok(String(response.contentType).includes('application/json'));
-      assert.strictEqual(response.json.feature, 'v');
-      assert.strictEqual(response.json.value, input + INJECTED_OFFSET);
-      assert.notStrictEqual(response.json.value, input + ORIGINAL_OFFSET);
+      assert.deepStrictEqual(response.json, { feature: 'v', value: expected[raw] });
     }
 
     const invalid = await requestJson(port, '/api/regression/v?x=1.5');
@@ -154,7 +146,7 @@ async function main() {
     assert.ok(home.body.includes('Cats vs Dogs'));
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
-  console.log('result regression feature v self-tests passed; injected offset 115 differs from card offset 114');
+  console.log('result regression feature v self-tests passed');
 }
 
 main().catch((err) => {
