@@ -121,8 +121,7 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    // DELIBERATE round-1 source mismatch: card acceptance is 114/117/124.
-    const expected = { '-3': 115, '0': 118, '7': 125 };
+    const expected = { '-3': 114, '0': 117, '7': 124 };
     for (const raw of Object.keys(expected)) {
       const response = await requestJson(port, '/api/regression/y?x=' + raw);
       assert.strictEqual(response.status, 200, output());
@@ -150,7 +149,7 @@ async function main() {
     assert.strictEqual(health.status, 200);
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
-  console.log('result regression feature y self-tests passed against injected x+118, not card acceptance x+117');
+  console.log('result regression feature y self-tests passed against card formula x+117');
 }
 
 main().catch((err) => {
