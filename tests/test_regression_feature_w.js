@@ -5,9 +5,8 @@ const path = require('path');
 
 const CHECKPOINT_MS = 8000;
 
-// DELIBERATE TEST DEFECT: card acceptance requires x + 115 (112/115/122).
-// Delivery round 1 injects +1, so the built module returns 113/116/123.
-const INJECTED_VALUES = { '-3': 113, '0': 116, '7': 123 };
+// Card formula x + 115. The round-1 +1 injection was removed in delivery round 2.
+const EXPECTED_VALUES = { '-3': 112, '0': 115, '7': 122 };
 
 function checkpoint(label, work) {
   return new Promise((resolve, reject) => {
@@ -125,11 +124,11 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    for (const raw of Object.keys(INJECTED_VALUES)) {
+    for (const raw of Object.keys(EXPECTED_VALUES)) {
       const response = await requestJson(port, '/api/regression/w?x=' + raw);
       assert.strictEqual(response.status, 200, output());
       assert.ok(String(response.contentType).includes('application/json'));
-      assert.deepStrictEqual(response.json, { feature: 'w', value: INJECTED_VALUES[raw] });
+      assert.deepStrictEqual(response.json, { feature: 'w', value: EXPECTED_VALUES[raw] });
     }
 
     const invalid = await requestJson(port, '/api/regression/w?x=1.5');
