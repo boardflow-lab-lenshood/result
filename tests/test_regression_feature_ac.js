@@ -6,7 +6,7 @@ const path = require('path');
 const CHECKPOINT_MS = 8000;
 
 // DELIBERATE TEST DEFECT: card acceptance requires x + 203 (200/203/210).
-// Delivery round 1 injects +1, so the built module returns 201/204/211.
+// Delivery round 2 retains +1, so the built module returns 201/204/211.
 const INJECTED_VALUES = { '-3': 201, '0': 204, '7': 211 };
 
 function checkpoint(label, work) {
