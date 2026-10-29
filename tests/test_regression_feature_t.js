@@ -121,20 +121,13 @@ async function withServer(databaseUrl, fn) {
 async function main() {
   const databaseUrl = process.env.TEST_DATABASE_URL || 'postgres://invalid:invalid@127.0.0.1:1/none';
   const stop = await withServer(databaseUrl, async (port, output) => {
-    // DELIBERATE TEST INPUT, delivery_round 1 only.
-    // Card acceptance remains value = x + 112. Shipped module is required value PLUS ONE.
-    const cardAcceptance = { '-3': 109, '0': 112, '7': 119 };
-    const injected = { '-3': 110, '0': 113, '7': 120 };
-    for (const raw of Object.keys(injected)) {
+    const expected = { '-3': 109, '0': 112, '7': 119 };
+    for (const raw of Object.keys(expected)) {
       const response = await requestJson(port, '/api/regression/t?x=' + raw);
       assert.strictEqual(response.status, 200, output());
       assert.ok(String(response.contentType).includes('application/json'));
-      assert.deepStrictEqual(response.json, { feature: 't', value: injected[raw] });
-      assert.notStrictEqual(response.json.value, cardAcceptance[raw]);
+      assert.deepStrictEqual(response.json, { feature: 't', value: expected[raw] });
     }
-
-    const acceptanceProbe = await requestJson(port, '/api/regression/t?x=0');
-    assert.notDeepStrictEqual(acceptanceProbe.json, { feature: 't', value: 112 });
 
     const invalid = await requestJson(port, '/api/regression/t?x=1.5');
     assert.strictEqual(invalid.status, 400);
@@ -158,7 +151,7 @@ async function main() {
     assert.strictEqual(health.json.service, 'result');
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
-  console.log('result regression feature t self-tests passed; DELIBERATE +1 mismatch vs card acceptance x+112');
+  console.log('result regression feature t self-tests passed');
 }
 
 const hardStop = setTimeout(() => {
