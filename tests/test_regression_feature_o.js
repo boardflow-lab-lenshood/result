@@ -144,7 +144,9 @@ async function main() {
 
     const home = await requestJson(port, '/');
     assert.strictEqual(home.status, 200);
-    assert.ok(home.body.includes('Cats vs Dogs'));
+    assert.ok(home.body.includes('猫派'));
+    assert.ok(home.body.includes('狗派'));
+    assert.ok(home.body.includes('总票数'));
 
     const health = await requestJson(port, '/healthz');
     assert.ok(health.status === 200 || health.status === 503, output());

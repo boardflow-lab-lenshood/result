@@ -85,7 +85,12 @@ body{
 }
 
 #choice .choice .label{
-  text-transform: uppercase;
+  text-transform: none;
+}
+
+#choice .choice .count{
+  font-size: 28px;
+  line-height: 1.1em;
 }
 
 #choice .choice.dogs{

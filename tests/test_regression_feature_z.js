@@ -143,7 +143,9 @@ async function main() {
 
     const home = await requestJson(port, '/');
     assert.strictEqual(home.status, 200);
-    assert.ok(home.body.includes('Cats vs Dogs'));
+    assert.ok(home.body.includes('猫派'));
+    assert.ok(home.body.includes('狗派'));
+    assert.ok(home.body.includes('总票数'));
   });
   assert.strictEqual(stop.graceful, true, 'SIGTERM must stop the server without waiting on pool.end');
   console.log('result regression feature z self-tests passed');

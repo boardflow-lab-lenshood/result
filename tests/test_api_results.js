@@ -153,7 +153,14 @@ async function main() {
 
       const home = await requestJson(port, '/');
       assert.strictEqual(home.status, 200);
-      assert.ok(home.body.includes('Cats vs Dogs'));
+      assert.ok(home.body.includes('猫派'));
+      assert.ok(home.body.includes('狗派'));
+      assert.ok(home.body.includes('总票数'));
+      assert.ok(home.body.includes('id="count-a"'));
+      assert.ok(home.body.includes('id="count-b"'));
+      assert.ok(home.body.includes('id="total-count"'));
+      assert.ok(!home.body.includes('Cats'));
+      assert.ok(!home.body.includes('Dogs'));
 
       const health = await requestJson(port, '/healthz');
       assert.strictEqual(health.status, 200);

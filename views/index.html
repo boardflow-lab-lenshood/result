@@ -2,7 +2,7 @@
 <html ng-app="catsvsdogs">
   <head>
     <meta charset="utf-8">
-    <title>Cats vs Dogs -- Result</title>
+    <title>猫派 vs 狗派 -- Result</title>
     <base href="/index.html">
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <meta name="keywords" content="docker-compose, docker, stack">
@@ -20,21 +20,22 @@
       <div id="content-container-center">
         <div id="choice">
           <div class="choice cats">
-            <div class="label">Cats</div>
+            <div class="label">猫派</div>
+            <div class="count" id="count-a">{{aCount}}</div>
             <div class="stat">{{aPercent | number:1}}%</div>
           </div>
           <div class="divider"></div>
           <div class="choice dogs">
-            <div class="label">Dogs</div>
+            <div class="label">狗派</div>
+            <div class="count" id="count-b">{{bCount}}</div>
             <div class="stat">{{bPercent | number:1}}%</div>
           </div>
         </div>
       </div>
     </div>
     <div id="result">
-      <span ng-if="total == 0">No votes yet</span>
-      <span ng-if="total == 1">{{total}} vote</span>
-      <span ng-if="total >= 2">{{total}} votes</span>
+      <span id="total-label">总票数</span>
+      <span id="total-count">{{total}}</span>
     </div>
     <script src="socket.io.js"></script>
     <script src="angular.min.js"></script>
