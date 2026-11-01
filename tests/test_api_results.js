@@ -167,6 +167,62 @@ async function main() {
       assert.deepStrictEqual(health.json, { status: 'ok', service: 'result' });
     });
 
+    await checkpoint('truncate votes before summary', () => admin.query('TRUNCATE votes'));
+    await withServer(databaseUrl, async (port) => {
+      const emptySummary = await requestJson(port, '/api/uat/result-summary');
+      assert.strictEqual(emptySummary.status, 200);
+      assert.ok(String(emptySummary.contentType).includes('application/json'));
+      assert.deepStrictEqual(emptySummary.json, {
+        counts: { a: 0, b: 0 },
+        total: 0,
+        leader: null
+      });
+      const emptyResults = await requestJson(port, '/api/results');
+      assert.deepStrictEqual(emptyResults.json, { a: 0, b: 0 });
+
+      await checkpoint('insert summary vote a', () => admin.query(
+        "INSERT INTO votes (id, vote) VALUES ('summary-a', 'a')"
+      ));
+      const leaderA = await requestJson(port, '/api/uat/result-summary');
+      assert.strictEqual(leaderA.status, 200);
+      assert.deepStrictEqual(leaderA.json, {
+        counts: { a: 1, b: 0 },
+        total: 1,
+        leader: 'a'
+      });
+
+      await checkpoint('insert summary vote b', () => admin.query(
+        "INSERT INTO votes (id, vote) VALUES ('summary-b', 'b')"
+      ));
+      const tied = await requestJson(port, '/api/uat/result-summary');
+      assert.deepStrictEqual(tied.json, {
+        counts: { a: 1, b: 1 },
+        total: 2,
+        leader: null
+      });
+      const tiedAgain = await requestJson(port, '/api/uat/result-summary');
+      assert.deepStrictEqual(tiedAgain.json, tied.json);
+      const tiedResults = await requestJson(port, '/api/results');
+      assert.deepStrictEqual(tiedResults.json, { a: 1, b: 1 });
+
+      await checkpoint('insert second summary vote b', () => admin.query(
+        "INSERT INTO votes (id, vote) VALUES ('summary-b2', 'b')"
+      ));
+      const leaderB = await requestJson(port, '/api/uat/result-summary');
+      assert.deepStrictEqual(leaderB.json, {
+        counts: { a: 1, b: 2 },
+        total: 3,
+        leader: 'b'
+      });
+      const resultsAfterSummary = await requestJson(port, '/api/results');
+      assert.deepStrictEqual(resultsAfterSummary.json, { a: 1, b: 2 });
+      const home = await requestJson(port, '/');
+      assert.strictEqual(home.status, 200);
+      assert.ok(home.body.includes('id="count-a"'));
+      assert.ok(home.body.includes('id="count-b"'));
+      assert.ok(home.body.includes('id="total-count"'));
+    });
+
     await withServer('postgres://invalid:invalid@127.0.0.1:1/none', async (port, output) => {
       const failed = await requestJson(port, '/api/results');
       assert.strictEqual(failed.status, 503);
@@ -178,6 +234,14 @@ async function main() {
       assert.ok(!('a' in failed.json));
       assert.ok(!('b' in failed.json));
       assert.ok(output().includes('Failed to read vote counts'));
+
+      const failedSummary = await requestJson(port, '/api/uat/result-summary');
+      assert.strictEqual(failedSummary.status, 503);
+      assert.deepStrictEqual(failedSummary.json, {
+        error: 'database_unavailable',
+        service: 'result'
+      });
+      assert.ok(output().includes('Failed to read result summary'));
     });
   } finally {
     await Promise.race([

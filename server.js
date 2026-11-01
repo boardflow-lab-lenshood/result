@@ -148,6 +148,22 @@ function queryVoteCounts(callback) {
   });
 }
 
+function summarizeVoteCounts(votes) {
+  var counts = {a: votes.a, b: votes.b};
+  var total = counts.a + counts.b;
+  var leader = null;
+  if (counts.a > counts.b) {
+    leader = 'a';
+  } else if (counts.b > counts.a) {
+    leader = 'b';
+  }
+  return {
+    counts: counts,
+    total: total,
+    leader: leader
+  };
+}
+
 app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/views'));
@@ -204,20 +220,34 @@ app.get('/api/regression/:name', function (req, res) {
   }
 });
 
+function sendVoteReadFailure(res, err, logMessage) {
+  console.error(logMessage, {
+    error: err.message,
+    code: err.code
+  });
+  res.status(503).json({
+    error: 'database_unavailable',
+    service: 'result'
+  });
+}
+
 app.get('/api/results', function (req, res) {
   queryVoteCounts(function(err, votes) {
     if (err) {
-      console.error('Failed to read vote counts', {
-        error: err.message,
-        code: err.code
-      });
-      res.status(503).json({
-        error: 'database_unavailable',
-        service: 'result'
-      });
+      sendVoteReadFailure(res, err, 'Failed to read vote counts');
       return;
     }
     res.json({a: votes.a, b: votes.b});
+  });
+});
+
+app.get('/api/uat/result-summary', function (req, res) {
+  queryVoteCounts(function(err, votes) {
+    if (err) {
+      sendVoteReadFailure(res, err, 'Failed to read result summary');
+      return;
+    }
+    res.json(summarizeVoteCounts(votes));
   });
 });
 
@@ -241,5 +271,6 @@ module.exports = {
   server: server,
   pool: pool,
   collectVotesFromResult: collectVotesFromResult,
-  queryVoteCounts: queryVoteCounts
+  queryVoteCounts: queryVoteCounts,
+  summarizeVoteCounts: summarizeVoteCounts
 };
