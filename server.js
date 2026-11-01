@@ -148,6 +148,18 @@ function queryVoteCounts(callback) {
   });
 }
 
+function summarizeVotes(votes) {
+  var a = Number(votes.a) || 0;
+  var b = Number(votes.b) || 0;
+  var leader = 'tie';
+  if (a > b) {
+    leader = 'a';
+  } else if (b > a) {
+    leader = 'b';
+  }
+  return {total: a + b, leader: leader};
+}
+
 app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/views'));
@@ -225,6 +237,23 @@ app.get('/api/results', function (req, res) {
   });
 });
 
+app.get('/api/summary', function (req, res) {
+  queryVoteCounts(function(err, votes) {
+    if (err) {
+      console.error('Failed to read vote summary', {
+        error: err.message,
+        code: err.code
+      });
+      res.status(503).json({
+        error: 'database_unavailable',
+        service: 'result'
+      });
+      return;
+    }
+    res.json(summarizeVotes(votes));
+  });
+});
+
 server.listen(port, function () {
   var port = server.address().port;
   console.log('App running on port ' + port);
@@ -245,5 +274,6 @@ module.exports = {
   server: server,
   pool: pool,
   collectVotesFromResult: collectVotesFromResult,
-  queryVoteCounts: queryVoteCounts
+  queryVoteCounts: queryVoteCounts,
+  summarizeVotes: summarizeVotes
 };
