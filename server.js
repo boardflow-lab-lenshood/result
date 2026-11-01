@@ -204,6 +204,10 @@ app.get('/api/regression/:name', function (req, res) {
   }
 });
 
+app.get('/api/about', function (req, res) {
+  res.json({service: 'result', api_version: '1'});
+});
+
 app.get('/api/results', function (req, res) {
   queryVoteCounts(function(err, votes) {
     if (err) {
