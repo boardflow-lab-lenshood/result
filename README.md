@@ -20,4 +20,12 @@ If PostgreSQL is unavailable, the route returns HTTP 503:
 
 The server logs the database error message and code. It does not invent counts.
 
+`GET /api/summary` returns only the live total and leader:
+
+```json
+{"total": 0, "leader": "tie"}
+```
+
+`total` is `a + b`. `leader` is `"tie"` when the counts are equal, including zero votes, otherwise `"a"` or `"b"`. A database failure returns the same 503 body as `/api/results` and does not invent a zero-vote summary.
+
 `GET /api/regression/<name>?x=<integer>` loads `regression_features/<name>.js` and returns `evaluate(x)` as JSON. `name` must match `[a-z][a-z0-9_]{0,31}`. A missing module returns 404 JSON, a non-integer `x` returns 400 JSON, and a module exception returns 500 JSON with a diagnostic that does not include secrets. The built-in `echo` module returns `{"feature":"echo","value":x}`.
