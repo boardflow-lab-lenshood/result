@@ -1,5 +1,4 @@
 var express = require('express'),
-    async = require('async'),
     { Pool } = require('pg'),
     path = require('path'),
     fs = require('fs'),
@@ -29,48 +28,29 @@ pool.on('error', function(err) {
 
 var shuttingDown = false;
 var voteBroadcastTimer = null;
-var voteBroadcastRelease = null;
 
-async.retry(
-  {times: 1000, interval: 1000},
-  function(callback) {
-    if (shuttingDown) {
-      callback(new Error('shutdown'));
-      return;
-    }
-    pool.connect(function(err, client, done) {
-      if (err) {
-        console.error("Waiting for db");
-      }
-      callback(err, client, done);
-    });
-  },
-  function(err, client, done) {
-    if (err) {
-      return console.error("Giving up");
-    }
-    console.log("Connected to db");
-    voteBroadcastRelease = done;
-    getVotes(client);
-  }
-);
+getVotes();
 
-function getVotes(client) {
+function getVotes() {
   if (shuttingDown) {
     return;
   }
-  client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
+  queryVoteCounts(function(err, votes) {
     if (shuttingDown) {
       return;
     }
     if (err) {
-      console.error("Error performing query: " + err);
+      process.stderr.write(JSON.stringify({
+        level: 'error',
+        event: 'vote_broadcast_failed',
+        code: err.code,
+        stack: err.stack
+      }) + '\n');
     } else {
-      var votes = collectVotesFromResult(result);
       io.sockets.emit("scores", JSON.stringify(votes));
     }
 
-    voteBroadcastTimer = setTimeout(function() {getVotes(client) }, 1000);
+    voteBroadcastTimer = setTimeout(getVotes, 1000);
   });
 }
 
@@ -83,14 +63,6 @@ function shutdown(signal) {
   if (voteBroadcastTimer) {
     clearTimeout(voteBroadcastTimer);
     voteBroadcastTimer = null;
-  }
-  if (typeof voteBroadcastRelease === 'function') {
-    try {
-      voteBroadcastRelease();
-    } catch (err) {
-      console.error('Vote broadcast release failed', {code: err.code || 'release_failed'});
-    }
-    voteBroadcastRelease = null;
   }
   try {
     server.close();
@@ -238,6 +210,19 @@ app.get('/api/results', function (req, res) {
       return;
     }
     res.json({a: votes.a, b: votes.b});
+  });
+});
+
+app.get('/api/arena/20261102/summary', function (req, res) {
+  res.set('Cache-Control', 'no-store');
+  queryVoteCounts(function(err, votes) {
+    if (err) {
+      sendVoteReadFailure(res, err, 'Failed to read arena result summary');
+      return;
+    }
+    var summary = summarizeVoteCounts(votes);
+    summary.leader = summary.leader === null ? 'tie' : summary.leader;
+    res.json(summary);
   });
 });
 
