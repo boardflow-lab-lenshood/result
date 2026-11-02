@@ -1,0 +1,685 @@
+{
+  "node_version": "24.15.0",
+  "commands": [
+    {
+      "file": "pg_config",
+      "args": [
+        "--bindir"
+      ],
+      "stdout": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/initdb",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-A",
+        "trust",
+        "-U",
+        "result_runtime"
+      ],
+      "stdout": "The files belonging to this database system will be owned by user \"xuhai.zhang\".\nThis user must also own the server process.\n\nThe database cluster will be initialized with locale \"C.UTF-8\".\nThe default database encoding has accordingly been set to \"UTF8\".\nThe default text search configuration will be set to \"english\".\n\nData page checksums are disabled.\n\ncreating directory /Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data ... ok\ncreating subdirectories ... ok\nselecting dynamic shared memory implementation ... posix\nselecting default \"max_connections\" ... 100\nselecting default \"shared_buffers\" ... 128MB\nselecting default time zone ... Asia/Shanghai\ncreating configuration files ... ok\nrunning bootstrap script ... ok\nperforming post-bootstrap initialization ... ok\nsyncing data to disk ... ok\n\nSuccess. You can now start the database server using:\n\n    '/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl' -D '/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data' -l logfile start\n\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-l",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/postgres.log",
+        "-w",
+        "-t",
+        "15",
+        "start"
+      ],
+      "stdout": "waiting for server to start.... done\nserver started\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-m",
+        "fast",
+        "-w",
+        "-t",
+        "15",
+        "stop"
+      ],
+      "stdout": "waiting for server to shut down.... done\nserver stopped\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-l",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/postgres.log",
+        "-w",
+        "-t",
+        "15",
+        "start"
+      ],
+      "stdout": "waiting for server to start.... done\nserver started\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-m",
+        "fast",
+        "-w",
+        "-t",
+        "15",
+        "stop"
+      ],
+      "stdout": "waiting for server to shut down.... done\nserver stopped\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-l",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/postgres.log",
+        "-w",
+        "-t",
+        "15",
+        "start"
+      ],
+      "stdout": "waiting for server to start.... done\nserver started\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "args": [
+        "tests/test_api_results.js"
+      ],
+      "stdout": "result api self-tests passed\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "args": [
+        "--test",
+        "tests/test_api_arena_summary.js",
+        "tests/test_api_arena_traces.js"
+      ],
+      "stdout": "▶ arena summary with a real PostgreSQL database and HTTP server\n  ✔ test_returns_zero_counts_and_tie_when_no_votes_exist (18.998209ms)\n  ✔ test_returns_tie_when_nonzero_counts_are_equal (3.526042ms)\n  ✔ test_returns_a_when_a_has_more_votes (3.379542ms)\n  ✔ test_returns_b_when_b_has_more_votes (3.676334ms)\n  ✔ test_reads_current_counts_when_votes_are_inserted_updated_and_deleted (10.418959ms)\n  ✔ test_counts_only_a_and_b_when_other_vote_values_exist (4.174167ms)\n  ✔ test_preserves_existing_results_when_summary_is_requested (4.698916ms)\n  ✔ test_preserves_existing_arena_summary_when_three_summary_is_available (2.639125ms)\n  ✔ test_preserves_legacy_null_leader_when_votes_are_tied (2.619958ms)\n  ✔ test_serves_results_page_when_summary_route_is_installed (2.845541ms)\n  ✔ test_reports_ready_when_database_is_available (2.704625ms)\n  ✔ test_accepts_socket_connections_when_summary_route_is_installed (2.4695ms)\n  ✔ test_keeps_serving_and_broadcasting_when_database_connections_are_lost (941.783833ms)\n  ✔ test_returns_503_json_when_database_cannot_be_reached (120.010792ms)\n  ✔ test_returns_503_and_recovers_when_vote_table_becomes_unavailable (7.719917ms)\n✔ arena summary with a real PostgreSQL database and HTTP server (1223.290833ms)\n▶ arena trace HTTP API with real PostgreSQL\n  ✔ test_returns_sorted_current_voters_and_counts_when_trace_matches_exactly (9.416541ms)\n  ✔ test_returns_zero_counts_when_trace_is_unknown (3.239542ms)\n  ✔ test_reflects_current_vote_without_duplicates_when_same_voter_changes_vote (2.892667ms)\n  ✔ test_excludes_old_trace_when_current_vote_moves_to_another_trace (3.68475ms)\n  ✔ test_accepts_exact_trace_when_valid_1_A (3.512959ms)\n  ✔ test_accepts_exact_trace_when_valid_1_0 (4.15525ms)\n  ✔ test_accepts_exact_trace_when_valid_64_aaaaaaaa (2.964083ms)\n  ✔ test_accepts_exact_trace_when_valid_7_A0._:-z (3.465459ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_0 (2.536625ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_1 (2.699167ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_2 (1.916ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_3 (1.67925ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_4 (2.080834ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_5 (1.824833ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_6 (1.869916ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_7 (1.743375ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_8 (1.487375ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_9 (2.119666ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_10 (1.623666ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_11 (1.430083ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_12 (1.4935ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_13 (1.576ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_14 (1.474792ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_15 (1.368042ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_16 (1.209167ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_17 (1.43975ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_18 (1.404125ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_19 (1.249791ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_20 (1.196584ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_21 (1.501042ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_22 (1.267459ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_23 (1.188542ms)\n  ✔ test_returns_400_json_when_trace_is_invalid_24 (1.225292ms)\n  ✔ test_returns_400_json_when_path_is_invalid_ (1.275167ms)\n  ✔ test_returns_400_json_when_path_is_invalid_%2Fa%2Fb (1.1965ms)\n  ✔ test_returns_400_json_when_path_is_invalid_%2F%25ZZ (1.391458ms)\n  ✔ test_returns_400_json_when_path_is_invalid_%2F%25E0%25A4%25A (1.172333ms)\n  ✔ test_returns_503_json_when_trace_column_is_not_migrated (5.647833ms)\n  ✔ test_returns_503_json_when_votes_table_is_not_ready (2.005083ms)\n  ✔ test_preserves_existing_apis_when_trace_query_is_added (5.687875ms)\n  ✔ test_preserves_homepage_when_trace_query_is_added (2.384416ms)\n  ✔ test_returns_503_and_unhealthy_when_database_is_unreachable (86.927167ms)\n✔ arena trace HTTP API with real PostgreSQL (273.041167ms)\nℹ tests 57\nℹ suites 2\nℹ pass 57\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3301.837209\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "args": [
+        "tests/test_regression_features.js"
+      ],
+      "stdout": "result regression self-tests passed\n",
+      "stderr": "",
+      "exit_code": 0
+    },
+    {
+      "file": "/opt/homebrew/Cellar/postgresql@17/17.11_1/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs/data",
+        "-m",
+        "fast",
+        "-w",
+        "-t",
+        "15",
+        "stop"
+      ],
+      "stdout": "waiting for server to shut down.... done\nserver stopped\n",
+      "stderr": "",
+      "exit_code": 0
+    }
+  ],
+  "processes": [
+    {
+      "pid": 14708,
+      "executable": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "origin": "http://127.0.0.1:49538"
+    },
+    {
+      "pid": 14722,
+      "executable": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "origin": "http://127.0.0.1:49568"
+    },
+    {
+      "pid": 14732,
+      "executable": "/Users/xuhai.zhang/.nvm/versions/node/v24.15.0/bin/node",
+      "origin": "http://127.0.0.1:49574"
+    }
+  ],
+  "http": [
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/healthz",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "34",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"22-ZHUwXnSB625JyKgHYFPBJ3TTlHY\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"status\":\"ok\",\"service\":\"result\"}",
+      "duration_ms": 16.29216699999995
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"4a-z9Nb7UjqrJq15XmCDCyUzPsMwc4\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.129344708}",
+      "duration_ms": 1.8189170000000559
+    },
+    {
+      "phase": "monotonic",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"4a-OgSyPpWopaATw8xvQg/XHiJowZQ\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.131125708}",
+      "duration_ms": 1.328166999999894
+    },
+    {
+      "phase": "monotonic",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "73",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"49-y34D6nNKWLYWdAQT1JC5ObjYpoE\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.15839825}",
+      "duration_ms": 1.2895420000000968
+    },
+    {
+      "phase": "monotonic",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "72",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"48-OeartZBsr8JySez2kyDtmRn0iGA\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.1858545}",
+      "duration_ms": 1.7527079999999842
+    },
+    {
+      "phase": "monotonic",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"4a-73/TcPtoYXvxBztjQ3H8U2gTBBc\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.213230458}",
+      "duration_ms": 1.3308329999999842
+    },
+    {
+      "phase": "monotonic",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"4a-j/QnGZHgbb9cJ7JKOaq4++fb6r4\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.241606166}",
+      "duration_ms": 1.0828329999999369
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "public, max-age=0",
+        "connection": "close",
+        "content-length": "1480",
+        "content-type": "text/html; charset=UTF-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"5c8-1a19d745072\"",
+        "last-modified": "Mon, 02 Nov 2026 18:10:08 GMT",
+        "x-powered-by": "Express"
+      },
+      "body": "<!DOCTYPE html>\n<html ng-app=\"catsvsdogs\">\n  <head>\n    <meta charset=\"utf-8\">\n    <title>猫派 vs 狗派 -- Result</title>\n    <base href=\"/index.html\">\n    <meta name = \"viewport\" content = \"width=device-width, initial-scale = 1.0\">\n    <meta name=\"keywords\" content=\"docker-compose, docker, stack\">\n    <meta name=\"author\" content=\"Docker\">\n    <link rel='stylesheet' href='/stylesheets/style.css' />\n  </head>\n  <body ng-controller=\"statsCtrl\" >\n     <div id=\"background-stats\">\n       <div id=\"background-stats-1\">\n       </div><!--\n      --><div id=\"background-stats-2\">\n      </div>\n    </div>\n    <div id=\"content-container\">\n      <div id=\"content-container-center\">\n        <div id=\"choice\">\n          <div class=\"choice cats\">\n            <div class=\"label\">猫派</div>\n            <div class=\"count\" id=\"count-a\">{{aCount}}</div>\n            <div class=\"stat\">{{aPercent | number:1}}%</div>\n          </div>\n          <div class=\"divider\"></div>\n          <div class=\"choice dogs\">\n            <div class=\"label\">狗派</div>\n            <div class=\"count\" id=\"count-b\">{{bCount}}</div>\n            <div class=\"stat\">{{bPercent | number:1}}%</div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div id=\"result\">\n      <span id=\"total-label\">总票数</span>\n      <span id=\"total-count\">{{total}}</span>\n    </div>\n    <script src=\"socket.io.js\"></script>\n    <script src=\"angular.min.js\"></script>\n    <script src=\"app.js\"></script>\n  </body>\n</html>\n",
+      "duration_ms": 5.147874999999999
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/results",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "13",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"d-HAcndcs9QQTCaivDSD9QDRtcDhc\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"a\":2,\"b\":1}",
+      "duration_ms": 2.119416000000001
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/20261102/summary",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 1.974458000000027
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/three-20261102/summary",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 1.2286660000000893
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/uat/result-summary",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 1.1935420000000931
+    },
+    {
+      "phase": "before-outage",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/socket.io/?EIO=4&transport=polling",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "118",
+        "content-type": "text/plain; charset=UTF-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT"
+      },
+      "body": "0{\"sid\":\"lzOFQ0vpQUf26xCtAAAA\",\"upgrades\":[\"websocket\"],\"pingInterval\":25000,\"pingTimeout\":20000,\"maxPayload\":1000000}",
+      "duration_ms": 1.8808749999999463
+    },
+    {
+      "phase": "immediately-before-stop",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:36 GMT",
+        "etag": "W/\"4a-3sW2CdtWw8weml9aoirJ0UreBUM\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.283824833}",
+      "duration_ms": 0.9400829999999587
+    },
+    {
+      "phase": "database-stopped",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"4a-bATUqpK19xKYzH9bh8chVA4bxfk\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.396144666}",
+      "duration_ms": 1.3981249999999363
+    },
+    {
+      "phase": "database-stopped",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/healthz",
+      "status": 503,
+      "headers": {
+        "connection": "close",
+        "content-length": "43",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"2b-NYEwgkYexc+h05EPpZwgQxoUrxE\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"status\":\"unavailable\",\"service\":\"result\"}",
+      "duration_ms": 1.9477499999998145
+    },
+    {
+      "phase": "database-stopped",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/results",
+      "status": 503,
+      "headers": {
+        "connection": "close",
+        "content-length": "51",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"33-s3GObsnJugWslLc/yTyua1gT/XI\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"error\":\"database_unavailable\",\"service\":\"result\"}",
+      "duration_ms": 1.0632080000000315
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/healthz",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "34",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"22-ZHUwXnSB625JyKgHYFPBJ3TTlHY\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"status\":\"ok\",\"service\":\"result\"}",
+      "duration_ms": 5.354041999999936
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"4a-KQc+BhfW/VKBmHecncFrGim2uPU\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.543227708}",
+      "duration_ms": 0.7036659999998847
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "public, max-age=0",
+        "connection": "close",
+        "content-length": "1480",
+        "content-type": "text/html; charset=UTF-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"5c8-1a19d745072\"",
+        "last-modified": "Mon, 02 Nov 2026 18:10:08 GMT",
+        "x-powered-by": "Express"
+      },
+      "body": "<!DOCTYPE html>\n<html ng-app=\"catsvsdogs\">\n  <head>\n    <meta charset=\"utf-8\">\n    <title>猫派 vs 狗派 -- Result</title>\n    <base href=\"/index.html\">\n    <meta name = \"viewport\" content = \"width=device-width, initial-scale = 1.0\">\n    <meta name=\"keywords\" content=\"docker-compose, docker, stack\">\n    <meta name=\"author\" content=\"Docker\">\n    <link rel='stylesheet' href='/stylesheets/style.css' />\n  </head>\n  <body ng-controller=\"statsCtrl\" >\n     <div id=\"background-stats\">\n       <div id=\"background-stats-1\">\n       </div><!--\n      --><div id=\"background-stats-2\">\n      </div>\n    </div>\n    <div id=\"content-container\">\n      <div id=\"content-container-center\">\n        <div id=\"choice\">\n          <div class=\"choice cats\">\n            <div class=\"label\">猫派</div>\n            <div class=\"count\" id=\"count-a\">{{aCount}}</div>\n            <div class=\"stat\">{{aPercent | number:1}}%</div>\n          </div>\n          <div class=\"divider\"></div>\n          <div class=\"choice dogs\">\n            <div class=\"label\">狗派</div>\n            <div class=\"count\" id=\"count-b\">{{bCount}}</div>\n            <div class=\"stat\">{{bPercent | number:1}}%</div>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div id=\"result\">\n      <span id=\"total-label\">总票数</span>\n      <span id=\"total-count\">{{total}}</span>\n    </div>\n    <script src=\"socket.io.js\"></script>\n    <script src=\"angular.min.js\"></script>\n    <script src=\"app.js\"></script>\n  </body>\n</html>\n",
+      "duration_ms": 0.8660000000002128
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/results",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "13",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"d-HAcndcs9QQTCaivDSD9QDRtcDhc\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"a\":2,\"b\":1}",
+      "duration_ms": 1.7413329999999405
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/20261102/summary",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 0.7877079999998386
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/arena/three-20261102/summary",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 0.7584999999999127
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/api/uat/result-summary",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "47",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"2f-hNC+AdHQ8onxb+TV20FS1p9RlYg\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"counts\":{\"a\":2,\"b\":1},\"total\":3,\"leader\":\"a\"}",
+      "duration_ms": 0.6281670000000759
+    },
+    {
+      "phase": "database-restored",
+      "pid": 14708,
+      "method": "GET",
+      "url": "http://127.0.0.1:49538/socket.io/?EIO=4&transport=polling",
+      "status": 200,
+      "headers": {
+        "connection": "close",
+        "content-length": "118",
+        "content-type": "text/plain; charset=UTF-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT"
+      },
+      "body": "0{\"sid\":\"S0RrQDhV-bAFTW0bAAAB\",\"upgrades\":[\"websocket\"],\"pingInterval\":25000,\"pingTimeout\":20000,\"maxPayload\":1000000}",
+      "duration_ms": 1.1215000000001965
+    },
+    {
+      "phase": "cold-start-database-stopped",
+      "pid": 14722,
+      "method": "GET",
+      "url": "http://127.0.0.1:49568/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"4a-8WlptZa/4QbUU1Bc/a7ho5yrz8U\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.070356625}",
+      "duration_ms": 3.0043339999999716
+    },
+    {
+      "phase": "cold-start-database-stopped",
+      "pid": 14722,
+      "method": "GET",
+      "url": "http://127.0.0.1:49568/healthz",
+      "status": 503,
+      "headers": {
+        "connection": "close",
+        "content-length": "43",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"2b-NYEwgkYexc+h05EPpZwgQxoUrxE\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"status\":\"unavailable\",\"service\":\"result\"}",
+      "duration_ms": 1.2911249999999654
+    },
+    {
+      "phase": "database-handshake-pending",
+      "pid": 14732,
+      "method": "GET",
+      "url": "http://127.0.0.1:49574/api/arena/seven-20261103/runtime",
+      "status": 200,
+      "headers": {
+        "cache-control": "no-store",
+        "connection": "close",
+        "content-length": "74",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Mon, 02 Nov 2026 19:03:37 GMT",
+        "etag": "W/\"4a-vctM31hlj36JFxJZMkEjiRPE5jA\"",
+        "x-powered-by": "Express"
+      },
+      "body": "{\"service\":\"result\",\"node_version\":\"24.15.0\",\"uptime_seconds\":0.074396167}",
+      "duration_ms": 3.1765419999999267
+    }
+  ],
+  "fixture": {
+    "owner": "result-runtime-test",
+    "directory": "/Users/xuhai.zhang/.codex/worktrees/board-delivery-legacy-cleanup/aiworkforce-platform/.codex/multicard-20261101/workspaces/da271bdcc03741c293e6a0feeefc1238/七卡双批开发 Agent/evidence/fa18bbf1-runtime-sync-epoch2/result-runtime-owned-ThkUTs",
+    "port": 49536,
+    "exclusive": true
+  },
+  "process_logs": [
+    {
+      "pid": 14708,
+      "output": "Mon, 02 Nov 2026 19:03:36 GMT body-parser deprecated undefined extended: provide extended option at server.js:140:17\nApp running on port 49538\nPostgreSQL pool error {\n  error: 'terminating connection due to administrator command',\n  code: '57P01'\n}\nPostgreSQL readiness check failed Error: connect ECONNREFUSED 127.0.0.1:49536\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {\n  errno: -61,\n  code: 'ECONNREFUSED',\n  syscall: 'connect',\n  address: '127.0.0.1',\n  port: 49536\n}\n{\"level\":\"error\",\"event\":\"Failed to read vote counts\",\"code\":\"ECONNREFUSED\",\"stack\":\"Error: connect ECONNREFUSED 127.0.0.1:49536\\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)\"}\nPostgreSQL pool error {\n  error: 'terminating connection due to administrator command',\n  code: '57P01'\n}\nShutting down result service { signal: 'SIGTERM' }\n"
+    },
+    {
+      "pid": 14722,
+      "output": "Mon, 02 Nov 2026 19:03:37 GMT body-parser deprecated undefined extended: provide extended option at server.js:140:17\nApp running on port 49568\n{\"level\":\"error\",\"event\":\"vote_broadcast_failed\",\"code\":\"ECONNREFUSED\",\"stack\":\"Error: connect ECONNREFUSED 127.0.0.1:49536\\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)\"}\nPostgreSQL readiness check failed Error: connect ECONNREFUSED 127.0.0.1:49536\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {\n  errno: -61,\n  code: 'ECONNREFUSED',\n  syscall: 'connect',\n  address: '127.0.0.1',\n  port: 49536\n}\nShutting down result service { signal: 'SIGTERM' }\n"
+    },
+    {
+      "pid": 14732,
+      "output": "Mon, 02 Nov 2026 19:03:37 GMT body-parser deprecated undefined extended: provide extended option at server.js:140:17\nApp running on port 49574\nShutting down result service { signal: 'SIGTERM' }\nShutdown timed out; forcing exit\n"
+    }
+  ]
+}

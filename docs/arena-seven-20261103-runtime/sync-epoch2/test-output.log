@@ -1,0 +1,21 @@
+
+> result@1.0.0 test:runtime
+> node --test tests/test_api_arena_runtime.js
+
+▶ runtime using real HTTP and an exclusively owned PostgreSQL cluster
+  ✔ test_returns_actual_process_runtime_when_database_is_available (19.119625ms)
+  ✔ test_uptime_never_decreases_when_same_process_is_requested_repeatedly (138.974459ms)
+  ✔ test_preserves_existing_routes_when_runtime_is_added (13.834042ms)
+  ✔ test_preserves_runtime_and_recovers_dependencies_when_owned_database_is_stopped (266.387083ms)
+  ✔ test_serves_runtime_on_cold_start_when_owned_database_is_offline (343.926917ms)
+  ✔ test_serves_runtime_without_waiting_when_database_handshake_is_pending (1601.851417ms)
+  ✔ test_passes_existing_suite_when_using_the_owned_database (7995.801084ms)
+✔ runtime using real HTTP and an exclusively owned PostgreSQL cluster (11349.96ms)
+ℹ tests 7
+ℹ suites 1
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13749.743042

@@ -1,0 +1,42 @@
+{
+  "action": "SYNC_MAIN",
+  "card_id": "fa18bbf1d51f43a29cf7bfc33e169bca",
+  "execution_id": "b7f1d529e5994f52906158cdade3f744",
+  "spec_revision": "b135a204392848a094993415b22b4f65",
+  "delivery_round": 1,
+  "baseline_epoch": 2,
+  "branch": "codex/fa18bbf1-result-runtime",
+  "base": "155679ec7983279ce683f259669df80bb2820060",
+  "source_merge_commit": "3a60d1c78fa7c2f77f5ea1500cc4f27896572805",
+  "parents": [
+    "9cde118a64ca0eab5fd2e6bb4b77fb6d77307762",
+    "155679ec7983279ce683f259669df80bb2820060"
+  ],
+  "merge_base_is_ancestor_exit_code": 0,
+  "command": "RUNTIME_EVIDENCE_DIR=\"$PWD/evidence/fa18bbf1-runtime-sync-epoch2\" npm --prefix cards/fa18bbf1-result run test:runtime",
+  "exit_code": 0,
+  "runtime_tests_passed": 7,
+  "summary_and_trace_tests_passed": 57,
+  "tests_skipped": 0,
+  "source_sha256": {
+    "server.js": "95ef54d6f2b633a9503ab80b03aeccb8449b062e0289ecb8d290c4a84271dfd3",
+    "package.json": "08b07680d32820e1d853283b06e3290eb4424807698d06b27ab00a279e3f794e",
+    "tests/test_api_arena_runtime.js": "3fca64bdef2693db934c0d6cbdb22398b2cf1b3b6c374d124c563df1725fdc23",
+    "Dockerfile": "79310cc744820ee051c42420af74f68ea0710febaa56fd9c03ac694a7d33248f",
+    "tests/test_api_arena_traces.js": "54c6b29280c3e61db293328981d9e4403d7898b5347e86a78794d43494c85131"
+  },
+  "cleanup": {
+    "result_pids_exited": [
+      14708,
+      14722,
+      14732
+    ],
+    "closed_ports": [
+      49536,
+      49538,
+      49568,
+      49574
+    ],
+    "data_dir_removed": true
+  }
+}
