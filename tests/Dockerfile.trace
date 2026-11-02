@@ -1,0 +1,7 @@
+# Reuse the unchanged locked dependencies when external registries are unavailable.
+ARG RUNTIME_BASE=boardflow-real-uat/result:65b9eccdddff2c1e938259e60ffb175c52458294
+FROM ${RUNTIME_BASE}
+WORKDIR /usr/local/app
+COPY . .
+ENV PORT=80
+CMD ["node", "server.js"]
