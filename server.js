@@ -193,10 +193,12 @@ app.get('/api/regression/:name', function (req, res) {
 });
 
 function sendVoteReadFailure(res, err, logMessage) {
-  console.error(logMessage, {
-    error: err.message,
-    code: err.code
-  });
+  process.stderr.write(JSON.stringify({
+    level: 'error',
+    event: logMessage,
+    code: err.code,
+    stack: err.stack
+  }) + '\n');
   res.status(503).json({
     error: 'database_unavailable',
     service: 'result'
@@ -213,7 +215,7 @@ app.get('/api/results', function (req, res) {
   });
 });
 
-app.get('/api/arena/20261102/summary', function (req, res) {
+app.get(['/api/arena/20261102/summary', '/api/arena/three-20261102/summary'], function (req, res) {
   res.set('Cache-Control', 'no-store');
   queryVoteCounts(function(err, votes) {
     if (err) {

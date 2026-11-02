@@ -7,7 +7,7 @@ const { setTimeout: delay } = require('node:timers/promises');
 const { after, before, beforeEach, describe, test } = require('node:test');
 const { Pool } = require('pg');
 
-const SUMMARY_PATH = '/api/arena/20261102/summary';
+const SUMMARY_PATH = '/api/arena/three-20261102/summary';
 const TIMEOUT_MS = 8000;
 
 async function stopServer(child) {
@@ -154,6 +154,19 @@ describe('arena summary with a real PostgreSQL database and HTTP server', { conc
     const response = await get(server, '/api/results');
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), { a: 1, b: 1 });
+  });
+
+  test('test_preserves_existing_arena_summary_when_three_summary_is_available', async () => {
+    // Arrange
+    await admin.query("INSERT INTO votes VALUES ('a1', 'a'), ('b1', 'b')");
+
+    // Act
+    const response = await get(server, '/api/arena/20261102/summary');
+
+    // Assert
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('cache-control'), 'no-store');
+    assert.deepEqual(await response.json(), { total: 2, leader: 'tie', counts: { a: 1, b: 1 } });
   });
 
   test('test_preserves_legacy_null_leader_when_votes_are_tied', async () => {

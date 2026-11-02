@@ -28,7 +28,7 @@ The server logs the database error message and code. It does not invent counts.
 
 A unique highest count sets `leader` to `"a"` or `"b"`. The route does not write votes. If PostgreSQL is unavailable it returns the same HTTP 503 body as `GET /api/results`.
 
-`GET /api/arena/20261102/summary` reads the current PostgreSQL vote counts on every request and returns HTTP 200 JSON:
+`GET /api/arena/three-20261102/summary` reads the current PostgreSQL vote counts on every request and returns HTTP 200 JSON. The existing `/api/arena/20261102/summary` remains available with the same behavior:
 
 ```json
 {"total": 0, "leader": "tie", "counts": {"a": 0, "b": 0}}
