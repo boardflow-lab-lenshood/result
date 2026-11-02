@@ -258,11 +258,15 @@ describe('runtime using real HTTP and an exclusively owned PostgreSQL cluster', 
     await command(process.execPath, ['tests/test_api_results.js'], {
       cwd: ROOT, env: { ...process.env, TEST_DATABASE_URL: databaseUrl }
     });
-    const summaryOutput = await command(process.execPath, ['--test', 'tests/test_api_arena_summary.js'], {
+    const suiteOutput = await command(process.execPath, [
+      '--test', 'tests/test_api_arena_summary.js', 'tests/test_api_arena_traces.js'
+    ], {
       cwd: ROOT, env: { ...process.env, TEST_DATABASE_URL: databaseUrl }
     });
-    assert.match(summaryOutput, /(?:#|ℹ) pass [1-9]\d*\b/);
-    assert.match(summaryOutput, /(?:#|ℹ) skipped 0\b/);
+    assert.match(suiteOutput, /arena summary with a real PostgreSQL database and HTTP server/);
+    assert.match(suiteOutput, /arena trace HTTP API with real PostgreSQL/);
+    assert.match(suiteOutput, /(?:#|ℹ) pass [1-9]\d*\b/);
+    assert.match(suiteOutput, /(?:#|ℹ) skipped 0\b/);
     await command(process.execPath, ['tests/test_regression_features.js'], { cwd: ROOT });
   });
 });

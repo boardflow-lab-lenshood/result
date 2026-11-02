@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "node tests/test_api_results.js && node --test tests/test_api_arena_summary.js && node tests/test_regression_features.js",
+    "test": "node tests/test_api_results.js && node --test tests/test_api_arena_summary.js tests/test_api_arena_traces.js && node tests/test_regression_features.js",
     "test:runtime": "node --test tests/test_api_arena_runtime.js"
   },
   "author": "",
