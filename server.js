@@ -205,6 +205,15 @@ function sendVoteReadFailure(res, err, logMessage) {
   });
 }
 
+app.get('/api/arena/seven-20261103/runtime', function (req, res) {
+  res.set('Cache-Control', 'no-store');
+  res.json({
+    service: 'result',
+    node_version: process.versions.node,
+    uptime_seconds: process.uptime()
+  });
+});
+
 app.get('/api/results', function (req, res) {
   queryVoteCounts(function(err, votes) {
     if (err) {
