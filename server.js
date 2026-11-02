@@ -228,6 +228,50 @@ app.get(['/api/arena/20261102/summary', '/api/arena/three-20261102/summary'], fu
   });
 });
 
+var TRACE_PATH = '/api/arena/seven-20261103/traces';
+var TRACE_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$/;
+
+function invalidTrace(res) {
+  res.status(400).json({error: 'invalid_trace_id', service: 'result'});
+}
+
+app.get([TRACE_PATH + '/:trace_id?', TRACE_PATH + '/*'], function (req, res) {
+  res.set('Cache-Control', 'no-store');
+  var traceId = req.params.trace_id;
+  var match = typeof traceId === 'string' && TRACE_ID.exec(traceId);
+  // JavaScript's $ can match before a final newline; require the entire value.
+  if (!match || match[0] !== traceId) {
+    invalidTrace(res);
+    return;
+  }
+  pool.query(
+    'SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"',
+    [traceId],
+    function(err, result) {
+      if (err) {
+        sendVoteReadFailure(res, err, 'trace_read_failed');
+        return;
+      }
+      var counts = {a: 0, b: 0};
+      result.rows.forEach(function(row) {
+        if (row.vote === 'a' || row.vote === 'b') {
+          counts[row.vote] += 1;
+        }
+      });
+      res.json({trace_id: traceId, total: result.rows.length, counts: counts, voters: result.rows});
+    }
+  );
+});
+
+app.use(function(err, req, res, next) {
+  if (err instanceof URIError && (req.path === TRACE_PATH || req.path.startsWith(TRACE_PATH + '/'))) {
+    res.set('Cache-Control', 'no-store');
+    invalidTrace(res);
+    return;
+  }
+  next(err);
+});
+
 app.get('/api/uat/result-summary', function (req, res) {
   queryVoteCounts(function(err, votes) {
     if (err) {
