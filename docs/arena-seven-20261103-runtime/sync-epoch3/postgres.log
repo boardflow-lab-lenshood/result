@@ -1,0 +1,233 @@
+2026-11-03 03:07:44.683 CST [17565] LOG:  starting PostgreSQL 17.11 (Homebrew) on aarch64-apple-darwin27.0.0, compiled by Apple clang version 21.0.0 (clang-2100.3.34.2), 64-bit
+2026-11-03 03:07:44.684 CST [17565] LOG:  listening on IPv4 address "127.0.0.1", port 50766
+2026-11-03 03:07:44.684 CST [17565] LOG:  listening on Unix socket "/tmp/.s.PGSQL.50766"
+2026-11-03 03:07:44.688 CST [17568] LOG:  database system was shut down at 2026-11-03 03:07:44 CST
+2026-11-03 03:07:44.691 CST [17565] LOG:  database system is ready to accept connections
+2026-11-03 03:07:44.762 CST [17573] LOG:  statement: CREATE TABLE votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)
+2026-11-03 03:07:44.766 CST [17573] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('a2', 'a'), ('b1', 'b')
+2026-11-03 03:07:44.891 CST [17575] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:44.910 CST [17575] LOG:  statement: SELECT 1
+2026-11-03 03:07:45.063 CST [17575] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.064 CST [17575] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.066 CST [17575] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.067 CST [17575] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.077 CST [17565] LOG:  received fast shutdown request
+2026-11-03 03:07:45.077 CST [17565] LOG:  aborting any active transactions
+2026-11-03 03:07:45.077 CST [17575] FATAL:  terminating connection due to administrator command
+2026-11-03 03:07:45.078 CST [17565] LOG:  background worker "logical replication launcher" (PID 17572) exited with exit code 1
+2026-11-03 03:07:45.079 CST [17566] LOG:  shutting down
+2026-11-03 03:07:45.079 CST [17566] LOG:  checkpoint starting: shutdown immediate
+2026-11-03 03:07:45.082 CST [17566] LOG:  checkpoint complete: wrote 44 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.004 s; sync files=36, longest=0.001 s, average=0.001 s; distance=196 kB, estimate=196 kB; lsn=0/154B9B0, redo lsn=0/154B9B0
+2026-11-03 03:07:45.084 CST [17565] LOG:  database system is shut down
+2026-11-03 03:07:45.244 CST [17579] LOG:  starting PostgreSQL 17.11 (Homebrew) on aarch64-apple-darwin27.0.0, compiled by Apple clang version 21.0.0 (clang-2100.3.34.2), 64-bit
+2026-11-03 03:07:45.245 CST [17579] LOG:  listening on IPv4 address "127.0.0.1", port 50766
+2026-11-03 03:07:45.245 CST [17579] LOG:  listening on Unix socket "/tmp/.s.PGSQL.50766"
+2026-11-03 03:07:45.249 CST [17582] LOG:  database system was shut down at 2026-11-03 03:07:45 CST
+2026-11-03 03:07:45.251 CST [17579] LOG:  database system is ready to accept connections
+2026-11-03 03:07:45.333 CST [17586] LOG:  statement: SELECT 1
+2026-11-03 03:07:45.336 CST [17586] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.338 CST [17586] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.339 CST [17586] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.340 CST [17586] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:45.348 CST [17579] LOG:  received fast shutdown request
+2026-11-03 03:07:45.348 CST [17579] LOG:  aborting any active transactions
+2026-11-03 03:07:45.348 CST [17586] FATAL:  terminating connection due to administrator command
+2026-11-03 03:07:45.349 CST [17579] LOG:  background worker "logical replication launcher" (PID 17585) exited with exit code 1
+2026-11-03 03:07:45.349 CST [17580] LOG:  shutting down
+2026-11-03 03:07:45.349 CST [17580] LOG:  checkpoint starting: shutdown immediate
+2026-11-03 03:07:45.351 CST [17580] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=5, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/154BA28, redo lsn=0/154BA28
+2026-11-03 03:07:45.352 CST [17579] LOG:  database system is shut down
+2026-11-03 03:07:45.594 CST [17591] LOG:  starting PostgreSQL 17.11 (Homebrew) on aarch64-apple-darwin27.0.0, compiled by Apple clang version 21.0.0 (clang-2100.3.34.2), 64-bit
+2026-11-03 03:07:45.595 CST [17591] LOG:  listening on IPv4 address "127.0.0.1", port 50766
+2026-11-03 03:07:45.595 CST [17591] LOG:  listening on Unix socket "/tmp/.s.PGSQL.50766"
+2026-11-03 03:07:45.598 CST [17594] LOG:  database system was shut down at 2026-11-03 03:07:45 CST
+2026-11-03 03:07:45.601 CST [17591] LOG:  database system is ready to accept connections
+2026-11-03 03:07:45.899 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:46.900 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.316 CST [17614] LOG:  statement: CREATE TABLE IF NOT EXISTS votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)
+2026-11-03 03:07:47.317 CST [17614] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:47.388 CST [17616] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.426 CST [17616] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.428 CST [17614] LOG:  statement: INSERT INTO votes (id, vote) VALUES ('voter-a', 'a')
+2026-11-03 03:07:47.430 CST [17616] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.430 CST [17614] LOG:  statement: INSERT INTO votes (id, vote) VALUES ('voter-b', 'b')
+2026-11-03 03:07:47.431 CST [17616] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.433 CST [17616] LOG:  statement: SELECT 1
+2026-11-03 03:07:47.436 CST [17614] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:47.509 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.544 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.546 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.546 CST [17614] LOG:  statement: INSERT INTO votes (id, vote) VALUES ('summary-a', 'a')
+2026-11-03 03:07:47.547 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.548 CST [17614] LOG:  statement: INSERT INTO votes (id, vote) VALUES ('summary-b', 'b')
+2026-11-03 03:07:47.548 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.549 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.550 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.550 CST [17614] LOG:  statement: INSERT INTO votes (id, vote) VALUES ('summary-b2', 'b')
+2026-11-03 03:07:47.551 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.551 CST [17619] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:47.902 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:48.903 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.768 CST [17630] LOG:  statement: CREATE SCHEMA arena_summary_daf7f529d62f4e8689f24c43160bdb24
+2026-11-03 03:07:49.768 CST [17631] LOG:  statement: CREATE SCHEMA arena_trace_397c329158bf4cbf8605295735622b6c
+2026-11-03 03:07:49.769 CST [17630] LOG:  statement: CREATE TABLE votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL)
+2026-11-03 03:07:49.769 CST [17631] LOG:  statement: CREATE TABLE votes (id VARCHAR(255) NOT NULL UNIQUE, vote VARCHAR(255) NOT NULL, trace_id VARCHAR(64))
+2026-11-03 03:07:49.866 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.866 CST [17635] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.877 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.878 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.879 CST [17631] LOG:  execute <unnamed>: INSERT INTO votes VALUES ($1,$2,$3),($4,$5,$3),($6,$7,$8),($9,$7,NULL)
+2026-11-03 03:07:49.879 CST [17631] DETAIL:  Parameters: $1 = 'z-voter', $2 = 'a', $3 = 'Target', $4 = 'a-voter', $5 = 'b', $6 = 'other', $7 = 'a', $8 = 'target', $9 = 'legacy'
+2026-11-03 03:07:49.885 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.885 CST [17635] DETAIL:  Parameters: $1 = 'Target'
+2026-11-03 03:07:49.888 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.889 CST [17631] LOG:  statement: INSERT INTO votes VALUES ('other', 'a', 'other-trace')
+2026-11-03 03:07:49.891 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.891 CST [17635] DETAIL:  Parameters: $1 = 'unknown'
+2026-11-03 03:07:49.893 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.894 CST [17631] LOG:  statement: INSERT INTO votes VALUES ('one', 'a', 'trace')
+2026-11-03 03:07:49.895 CST [17631] LOG:  statement: INSERT INTO votes VALUES ('one', 'b', 'trace') ON CONFLICT (id) DO UPDATE SET vote = EXCLUDED.vote
+2026-11-03 03:07:49.896 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.896 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.896 CST [17635] DETAIL:  Parameters: $1 = 'trace'
+2026-11-03 03:07:49.897 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.898 CST [17631] LOG:  statement: INSERT INTO votes VALUES ('one', 'a', 'old-trace')
+2026-11-03 03:07:49.899 CST [17631] LOG:  statement: UPDATE votes SET trace_id = 'new-trace', vote = 'b' WHERE id = 'one'
+2026-11-03 03:07:49.900 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.900 CST [17635] DETAIL:  Parameters: $1 = 'old-trace'
+2026-11-03 03:07:49.901 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.903 CST [17631] LOG:  execute <unnamed>: INSERT INTO votes VALUES ($1, $2, $3)
+2026-11-03 03:07:49.903 CST [17631] DETAIL:  Parameters: $1 = 'voter', $2 = 'a', $3 = 'A'
+2026-11-03 03:07:49.903 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.904 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.904 CST [17635] DETAIL:  Parameters: $1 = 'A'
+2026-11-03 03:07:49.905 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('a2', 'a'), ('b1', 'b'), ('b2', 'b')
+2026-11-03 03:07:49.905 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.906 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.907 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.908 CST [17631] LOG:  execute <unnamed>: INSERT INTO votes VALUES ($1, $2, $3)
+2026-11-03 03:07:49.908 CST [17631] DETAIL:  Parameters: $1 = 'voter', $2 = 'a', $3 = '0'
+2026-11-03 03:07:49.909 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.909 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.909 CST [17635] DETAIL:  Parameters: $1 = '0'
+2026-11-03 03:07:49.910 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.911 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('a2', 'a'), ('b1', 'b')
+2026-11-03 03:07:49.912 CST [17631] LOG:  execute <unnamed>: INSERT INTO votes VALUES ($1, $2, $3)
+2026-11-03 03:07:49.912 CST [17631] DETAIL:  Parameters: $1 = 'voter', $2 = 'a', $3 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+2026-11-03 03:07:49.913 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.913 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.913 CST [17635] DETAIL:  Parameters: $1 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+2026-11-03 03:07:49.914 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.915 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.917 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('b1', 'b'), ('b2', 'b')
+2026-11-03 03:07:49.917 CST [17631] LOG:  execute <unnamed>: INSERT INTO votes VALUES ($1, $2, $3)
+2026-11-03 03:07:49.917 CST [17631] DETAIL:  Parameters: $1 = 'voter', $2 = 'a', $3 = 'A0._:-z'
+2026-11-03 03:07:49.918 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.919 CST [17635] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.919 CST [17635] DETAIL:  Parameters: $1 = 'A0._:-z'
+2026-11-03 03:07:49.920 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.920 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.922 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.922 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.923 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('voter', 'a')
+2026-11-03 03:07:49.925 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.925 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.926 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('voter', 'b') ON CONFLICT (id) DO UPDATE SET vote = EXCLUDED.vote
+2026-11-03 03:07:49.927 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.928 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.928 CST [17630] LOG:  statement: DELETE FROM votes
+2026-11-03 03:07:49.929 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.932 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.932 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.933 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('other', 'c')
+2026-11-03 03:07:49.935 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.935 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.936 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.937 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.937 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('b1', 'b')
+2026-11-03 03:07:49.939 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.939 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.940 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.941 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.941 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.942 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a'), ('b1', 'b')
+2026-11-03 03:07:49.943 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.944 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.945 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.945 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.947 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.947 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.948 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.949 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.951 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.952 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.953 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.953 CST [17634] LOG:  statement: SELECT 1
+2026-11-03 03:07:49.954 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.954 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.956 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.957 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.957 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.958 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a')
+2026-11-03 03:07:49.959 CST [17634] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.959 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.960 CST [17630] LOG:  execute <unnamed>: SELECT pg_terminate_backend(pid) AS terminated FROM pg_stat_activity WHERE application_name = $1
+2026-11-03 03:07:49.960 CST [17630] DETAIL:  Parameters: $1 = 'arena_summary_daf7f529d62f4e8689f24c43160bdb24'
+2026-11-03 03:07:49.961 CST [17634] FATAL:  terminating connection due to administrator command
+2026-11-03 03:07:49.961 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.962 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.964 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.965 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.967 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.968 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.969 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.971 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.974 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.976 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.977 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.978 CST [17631] LOG:  statement: ALTER TABLE votes DROP COLUMN trace_id
+2026-11-03 03:07:49.979 CST [17635] ERROR:  column "trace_id" does not exist at character 46
+2026-11-03 03:07:49.979 CST [17635] STATEMENT:  SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.980 CST [17631] LOG:  statement: ALTER TABLE votes ADD COLUMN trace_id VARCHAR(64)
+2026-11-03 03:07:49.982 CST [17636] LOG:  execute <unnamed>: SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.982 CST [17636] DETAIL:  Parameters: $1 = 'trace'
+2026-11-03 03:07:49.983 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.984 CST [17631] LOG:  statement: ALTER TABLE votes RENAME TO owned_missing_votes
+2026-11-03 03:07:49.985 CST [17636] ERROR:  relation "votes" does not exist at character 34
+2026-11-03 03:07:49.985 CST [17636] STATEMENT:  SELECT id AS voter_id, vote FROM votes WHERE trace_id = $1 ORDER BY id COLLATE "C"
+2026-11-03 03:07:49.985 CST [17631] LOG:  statement: ALTER TABLE owned_missing_votes RENAME TO votes
+2026-11-03 03:07:49.985 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.986 CST [17631] LOG:  statement: INSERT INTO votes VALUES ('one', 'a', 'trace'), ('two', 'b', NULL)
+2026-11-03 03:07:49.989 CST [17637] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.990 CST [17637] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.990 CST [17637] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.991 CST [17637] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:49.992 CST [17637] LOG:  statement: SELECT 1
+2026-11-03 03:07:49.992 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:49.995 CST [17631] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:50.066 CST [17639] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.115 CST [17631] LOG:  statement: DROP SCHEMA IF EXISTS arena_trace_397c329158bf4cbf8605295735622b6c CASCADE
+2026-11-03 03:07:50.868 CST [17639] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.872 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:50.910 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.992 CST [17630] LOG:  statement: TRUNCATE votes
+2026-11-03 03:07:50.994 CST [17630] LOG:  statement: INSERT INTO votes VALUES ('a1', 'a')
+2026-11-03 03:07:50.995 CST [17639] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.996 CST [17630] LOG:  statement: ALTER TABLE votes RENAME TO temporarily_unavailable_votes
+2026-11-03 03:07:50.996 CST [17639] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.996 CST [17639] ERROR:  relation "votes" does not exist at character 38
+2026-11-03 03:07:50.996 CST [17639] STATEMENT:  SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:50.997 CST [17630] LOG:  statement: ALTER TABLE temporarily_unavailable_votes RENAME TO votes
+2026-11-03 03:07:50.999 CST [17642] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:51.004 CST [17630] LOG:  statement: DROP SCHEMA IF EXISTS arena_summary_daf7f529d62f4e8689f24c43160bdb24 CASCADE
+2026-11-03 03:07:51.913 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:52.914 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:53.916 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:54.919 CST [17599] LOG:  statement: SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote
+2026-11-03 03:07:55.211 CST [17591] LOG:  received fast shutdown request
+2026-11-03 03:07:55.211 CST [17591] LOG:  aborting any active transactions
+2026-11-03 03:07:55.213 CST [17591] LOG:  background worker "logical replication launcher" (PID 17597) exited with exit code 1
+2026-11-03 03:07:55.213 CST [17592] LOG:  shutting down
+2026-11-03 03:07:55.213 CST [17592] LOG:  checkpoint starting: shutdown immediate
+2026-11-03 03:07:55.242 CST [17592] LOG:  checkpoint complete: wrote 56 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.013 s, total=0.029 s; sync files=277, longest=0.001 s, average=0.001 s; distance=372 kB, estimate=372 kB; lsn=0/15A8AC0, redo lsn=0/15A8AC0
+2026-11-03 03:07:55.244 CST [17591] LOG:  database system is shut down
