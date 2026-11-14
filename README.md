@@ -28,6 +28,16 @@ message reception to compare with the `datetime` attribute. The fixture uses no 
 never sends scores into a shared business environment. Remote font stylesheets are omitted
 so this check does not depend on external font services.
 
+The layout regression opens separate 390×844 mobile (`isMobile: true`, device scale 1),
+768px, and 1280px contexts for both the current page and a snapshot of batch
+`16016d76d59046b2b963879a56471469`'s layout. That candidate placed the status outside
+the center container. The small HTML fixture includes its accompanying main/header rules
+while using the current application scripts and stylesheet. Waiting text and the updated
+time must fit fully inside the configured device viewport at scroll position zero, and the
+document must not overflow horizontally. Comparing against configured dimensions rather
+than an expanded mobile `innerWidth` catches browser auto-scaling as well as offscreen text.
+Screenshots and bounding rectangles are saved for each case; `isVisible()` alone is insufficient.
+
 These are isolated development checks. Verification against real deployed `scores`, including
 an independent session submitting a new vote and observing an increased total and reception
 time, remains a downstream integration check. The existing `docker-compose.test.yml` database
