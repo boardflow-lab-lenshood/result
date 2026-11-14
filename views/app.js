@@ -10,14 +10,28 @@ app.controller('statsCtrl', function($scope){
   $scope.aCount = 0;
   $scope.bCount = 0;
   $scope.total = 0;
+  $scope.lastUpdated = null;
 
   var updateScores = function(){
     socket.on('scores', function (json) {
-       data = JSON.parse(json);
-       var a = parseInt(data.a || 0);
-       var b = parseInt(data.b || 0);
+       var data;
+       try {
+         data = JSON.parse(json);
+       } catch (err) {
+         return;
+       }
+       if (!data || typeof data !== 'object' || Array.isArray(data)) {
+         return;
+       }
+
+       var a = getScoreCount(data.a);
+       var b = getScoreCount(data.b);
+       if (a === null || b === null) {
+         return;
+       }
 
        var percentages = getPercentages(a, b);
+       var receivedAt = new Date().toISOString();
 
        bg1.style.width = percentages.a + "%";
        bg2.style.width = percentages.b + "%";
@@ -28,6 +42,7 @@ app.controller('statsCtrl', function($scope){
          $scope.aCount = a;
          $scope.bCount = b;
          $scope.total = a + b;
+         $scope.lastUpdated = receivedAt;
        });
     });
   };
@@ -40,6 +55,14 @@ app.controller('statsCtrl', function($scope){
     init();
   });
 });
+
+function getScoreCount(value) {
+  var count = parseInt(value || 0, 10);
+  if (isNaN(count) || count < 0) {
+    return null;
+  }
+  return count;
+}
 
 function getPercentages(a, b) {
   var result = {};

@@ -159,6 +159,9 @@ async function main() {
       assert.ok(home.body.includes('id="count-a"'));
       assert.ok(home.body.includes('id="count-b"'));
       assert.ok(home.body.includes('id="total-count"'));
+      assert.ok(home.body.includes('id="waiting-for-data"'));
+      assert.ok(home.body.includes('id="last-updated"'));
+      assert.ok(home.body.includes('datetime="{{lastUpdated}}"'));
       assert.ok(!home.body.includes('Cats'));
       assert.ok(!home.body.includes('Dogs'));
 

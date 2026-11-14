@@ -56,6 +56,14 @@ body{
   font-size: 45px;
   font-weight: 600;
 }
+#realtime-status{
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 4px;
+}
+#last-updated{
+  margin-left: 4px;
+}
 #choice{
   transition: all 300ms linear;
   line-height:1.3em;
