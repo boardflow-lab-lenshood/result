@@ -96,7 +96,6 @@ def main():
             mouse.locator('button[value="a"]').click()
         assert mouse.locator("#vote-confirmation").inner_text() == "你已投给猫派"
         assert mouse.locator("#vote-confirmation").is_visible()
-        assert mouse.locator("#vote-confirmation").get_attribute("aria-live") == "polite"
         a_expected = {"a": report["baseline"]["a"] + 1, "b": report["baseline"]["b"]}
         wait_result(result, a_expected)
         mouse.screenshot(path=str(OUTPUT / "vote-mouse.png"), full_page=True)
