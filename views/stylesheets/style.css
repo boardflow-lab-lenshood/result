@@ -32,6 +32,15 @@ body{
   background-color: #00cbca;
 }
 
+main{
+  height:100%;
+}
+#content-container-center h1{
+  color:#254356;
+  font-size:28px;
+  margin:0 0 24px;
+}
+
 #content-container{
   z-index:2;
   position:relative;
