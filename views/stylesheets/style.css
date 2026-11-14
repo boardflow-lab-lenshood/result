@@ -46,9 +46,15 @@ body{
   text-align:center;
   vertical-align:middle;
 }
+#content-container-center h1{
+  color: #254356;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
 #result{
   z-index: 3;
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   right: 20px;
   color: #fff;

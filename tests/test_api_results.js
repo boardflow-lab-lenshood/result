@@ -159,6 +159,17 @@ async function main() {
       assert.ok(home.body.includes('id="count-a"'));
       assert.ok(home.body.includes('id="count-b"'));
       assert.ok(home.body.includes('id="total-count"'));
+      assert.ok(home.body.includes('<html lang="zh-CN"'));
+      assert.strictEqual((home.body.match(/<main\b/g) || []).length, 1);
+      assert.strictEqual((home.body.match(/<h1\b/g) || []).length, 1);
+      assert.ok(home.body.includes('<h1>实时投票结果</h1>'));
+      const mainStart = home.body.indexOf('<main id="content-container">');
+      const mainEnd = home.body.indexOf('</main>', mainStart);
+      assert.ok(mainStart >= 0 && mainEnd > mainStart);
+      const main = home.body.slice(mainStart, mainEnd);
+      assert.ok(main.includes('<div id="choice">'));
+      assert.ok(main.includes('<div id="result">'));
+      assert.ok(main.includes('总票数'));
       assert.ok(!home.body.includes('Cats'));
       assert.ok(!home.body.includes('Dogs'));
 
