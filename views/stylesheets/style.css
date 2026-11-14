@@ -67,6 +67,13 @@ body{
   width: 450px;
   height: 200px;
 }
+#update-status{
+  margin-top:20px;
+  padding:10px;
+  background:#fff;
+  color:#333;
+  font-size:16px;
+}
 #choice a{
   text-decoration:none;
 }
