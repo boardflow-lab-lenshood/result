@@ -32,6 +32,9 @@ body{
   background-color: #00cbca;
 }
 
+#main-content{
+  height:100%;
+}
 #content-container{
   z-index:2;
   position:relative;
@@ -45,6 +48,11 @@ body{
   display:table-cell;
   text-align:center;
   vertical-align:middle;
+}
+#content-container-center h1{
+  color: #254356;
+  font-size: 28px;
+  margin: 0 0 20px;
 }
 #result{
   z-index: 3;
