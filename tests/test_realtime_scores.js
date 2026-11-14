@@ -79,6 +79,8 @@ test('invalid messages neither end waiting nor change established results or rec
     '{', 'null', '[]', 'false', '0', '"scores"',
     '{"a":-1}', '{"a":1.5}', '{"a":"3oops"}', '{"a":"1.5"}',
     '{"a":{},"b":1}', '{"a":[],"b":1}', '{"a":true}',
+    '{"a":false,"b":1}', '{"a":null,"b":1}', '{"a":"","b":1}',
+    '{"a":1,"b":false}', '{"a":1,"b":null}', '{"a":1,"b":""}',
     '{"a":"NaN"}', '{"a":"Infinity"}', '{"a":1e309}',
     '{"a":9007199254740992}', '{"b":-2}'
   ];

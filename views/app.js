@@ -46,7 +46,7 @@ app.controller('statsCtrl', function($scope){
 });
 
 function parseCount(value) {
-  value = value || 0;
+  value = value === undefined ? 0 : value;
   if (typeof value !== 'number' &&
       (typeof value !== 'string' || !/^\s*\d+\s*$/.test(value))) {
     return null;

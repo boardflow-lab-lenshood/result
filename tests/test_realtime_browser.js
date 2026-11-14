@@ -93,10 +93,15 @@ async function main() {
     assert.ok(!state.status.includes('最近更新'));
     assert.equal(await page.evaluate(() => getComputedStyle(document.body).opacity), '1');
   }
+  const invalid = [
+    'null', '[]', '{"a":-1}', '{"a":1.5}', '{"a":"bad"}', '{broken',
+    '{"a":false,"b":1}', '{"a":null,"b":1}', '{"a":"","b":1}',
+    '{"a":1,"b":false}', '{"a":1,"b":null}', '{"a":1,"b":""}'
+  ];
   await waiting();
   socket.emit('message', { text: 'Welcome!' });
-  socket.emit('scores', '{broken');
-  await page.waitForFunction(() => window.browserReceptions.length === 1);
+  for (const payload of invalid) socket.emit('scores', payload);
+  await page.waitForFunction(count => window.browserReceptions.length === count, invalid.length);
   await waiting();
   await save('waiting');
 
@@ -134,11 +139,10 @@ async function main() {
   await scores(0, 0, ['50.0%', '50.0%'], 'zero');
   await scores(3, 1, ['75.0%', '25.0%'], 'three-one');
   const duplicate = await scores(3, 1, ['75.0%', '25.0%'], 'unchanged-counts');
-  for (const payload of ['null', '[]', '{"a":-1}', '{"a":1.5}', '{"a":"bad"}', '{broken']) {
-    socket.emit('scores', payload);
-  }
+  for (const payload of invalid) socket.emit('scores', payload);
   socket.emit('message', { text: 'Welcome again!' });
-  await page.waitForFunction(count => window.browserReceptions.length === count + 6, duplicate.receptions.length);
+  await page.waitForFunction(count => window.browserReceptions.length === count,
+    duplicate.receptions.length + invalid.length);
   await page.waitForTimeout(1200);
   assert.equal((await read()).datetime, duplicate.datetime);
   assert.deepEqual((await read()).counts, duplicate.counts);
