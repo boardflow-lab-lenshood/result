@@ -11,35 +11,49 @@ app.controller('statsCtrl', function($scope){
   $scope.bCount = 0;
   $scope.total = 0;
 
-  var updateScores = function(){
-    socket.on('scores', function (json) {
-       data = JSON.parse(json);
-       var a = parseInt(data.a || 0);
-       var b = parseInt(data.b || 0);
+  $scope.lastUpdated = null;
 
-       var percentages = getPercentages(a, b);
+  socket.on('scores', function (json) {
+    var receivedAt = new Date();
+    var data;
+    try {
+      data = JSON.parse(json);
+    } catch (err) {
+      return;
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return;
+    }
+    var a = parseCount(data.a);
+    var b = parseCount(data.b);
+    if (a === null || b === null) {
+      return;
+    }
 
-       bg1.style.width = percentages.a + "%";
-       bg2.style.width = percentages.b + "%";
+    var percentages = getPercentages(a, b);
+    bg1.style.width = percentages.a + "%";
+    bg2.style.width = percentages.b + "%";
 
-       $scope.$apply(function () {
-         $scope.aPercent = percentages.a;
-         $scope.bPercent = percentages.b;
-         $scope.aCount = a;
-         $scope.bCount = b;
-         $scope.total = a + b;
-       });
+    $scope.$apply(function () {
+      $scope.aPercent = percentages.a;
+      $scope.bPercent = percentages.b;
+      $scope.aCount = a;
+      $scope.bCount = b;
+      $scope.total = a + b;
+      $scope.lastUpdated = receivedAt.toISOString();
     });
-  };
-
-  var init = function(){
-    document.body.style.opacity=1;
-    updateScores();
-  };
-  socket.on('message',function(data){
-    init();
   });
 });
+
+function parseCount(value) {
+  value = value || 0;
+  if (typeof value !== 'number' &&
+      (typeof value !== 'string' || !/^\s*\d+\s*$/.test(value))) {
+    return null;
+  }
+  var count = Number(value);
+  return Number.isSafeInteger(count) && count >= 0 ? count : null;
+}
 
 function getPercentages(a, b) {
   var result = {};

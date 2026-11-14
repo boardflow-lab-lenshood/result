@@ -1,5 +1,40 @@
 # Result
 
+## Browser reception time
+
+Before the first valid `scores` event, the page shows “等待实时数据”. Each valid event updates
+“最近更新” and `time#last-updated[datetime]` using the current browser's reception time,
+even if the counts have not changed. The visible text uses the browser's local time zone;
+`datetime` is ISO 8601. Welcome messages, malformed JSON, invalid counts, and idle time do
+not update the timestamp. Reloading starts a new wait for data in that page.
+
+The existing JSON string payload (`a`/`b`, with absent counts defaulting to zero), rounded
+percentages, totals, and server/database behavior are preserved. The timestamp describes
+browser reception, not database write time or server polling time.
+
+## Local regression checks
+
+With Node.js 18 or newer, `npm test` runs the controller regression tests without services
+or extra test dependencies. `npm run test:browser` requires the app's Socket.IO dependency,
+Playwright, and Chromium to be available to Node (a reusable cache may be supplied through
+`NODE_PATH`). Set `RESULT_BROWSER_ARTIFACTS` to an isolated output directory to save screenshots
+and a JSON reception log.
+
+The browser check serves the actual page, scripts, and stylesheet through a loopback-only
+HTTP/Socket.IO fixture on an ephemeral port. It covers waiting, welcome and malformed messages,
+zero scores, 3/1 and 4/2 results, unchanged scores, idle time, reload, mobile visibility, and
+local-time display in an Asia/Shanghai browser. An independent browser listener records real
+message reception to compare with the `datetime` attribute. The fixture uses no database and
+never sends scores into a shared business environment. Remote font stylesheets are omitted
+so this check does not depend on external font services.
+
+These are isolated development checks. Verification against real deployed `scores`, including
+an independent session submitting a new vote and observing an increased total and reception
+time, remains a downstream integration check. The existing `docker-compose.test.yml` database
+API test still requires its separate PostgreSQL/container environment.
+
+## Existing routes
+
 Results UI. Existing routes are unchanged:
 
 - `GET /` serves the results page.
