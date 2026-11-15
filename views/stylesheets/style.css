@@ -3,7 +3,7 @@
 *{
   box-sizing:border-box;
 }
-html,body{
+html,body,main{
   margin:0;
   padding:0;
   height:100%;
@@ -45,6 +45,12 @@ body{
   display:table-cell;
   text-align:center;
   vertical-align:middle;
+}
+#content-container-center h1{
+  color: #fff;
+  font-size: 32px;
+  line-height: 1.3em;
+  margin: 0 0 24px;
 }
 #result{
   z-index: 3;

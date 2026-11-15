@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="catsvsdogs">
+<html lang="zh-CN" ng-app="catsvsdogs">
   <head>
     <meta charset="utf-8">
     <title>猫派 vs 狗派 -- Result</title>
@@ -10,33 +10,36 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body ng-controller="statsCtrl" >
-     <div id="background-stats">
-       <div id="background-stats-1">
-       </div><!--
-      --><div id="background-stats-2">
+    <main>
+      <div id="background-stats">
+         <div id="background-stats-1">
+         </div><!--
+        --><div id="background-stats-2">
+        </div>
       </div>
-    </div>
-    <div id="content-container">
-      <div id="content-container-center">
-        <div id="choice">
-          <div class="choice cats">
-            <div class="label">猫派</div>
-            <div class="count" id="count-a">{{aCount}}</div>
-            <div class="stat">{{aPercent | number:1}}%</div>
-          </div>
-          <div class="divider"></div>
-          <div class="choice dogs">
-            <div class="label">狗派</div>
-            <div class="count" id="count-b">{{bCount}}</div>
-            <div class="stat">{{bPercent | number:1}}%</div>
+      <div id="content-container">
+        <div id="content-container-center">
+          <h1>实时投票结果</h1>
+          <div id="choice">
+            <div class="choice cats">
+              <div class="label">猫派</div>
+              <div class="count" id="count-a">{{aCount}}</div>
+              <div class="stat">{{aPercent | number:1}}%</div>
+            </div>
+            <div class="divider"></div>
+            <div class="choice dogs">
+              <div class="label">狗派</div>
+              <div class="count" id="count-b">{{bCount}}</div>
+              <div class="stat">{{bPercent | number:1}}%</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="result">
-      <span id="total-label">总票数</span>
-      <span id="total-count">{{total}}</span>
-    </div>
+      <div id="result">
+        <span id="total-label">总票数</span>
+        <span id="total-count">{{total}}</span>
+      </div>
+    </main>
     <script src="socket.io.js"></script>
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
