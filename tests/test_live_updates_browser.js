@@ -32,6 +32,26 @@ async function run() {
       assert.equal(await page.locator('time#last-updated').count(), 0);
     };
     await waiting();
+    const result = await page.locator('#result').elementHandle();
+    const checkResult = async (total) => {
+      assert.equal(await page.locator('#result #total-label').innerText(), '总票数');
+      assert.equal(await page.locator('#result #total-count').innerText(), String(total));
+      assert.deepEqual(await result.evaluate((original) => ({
+        sameNode: original === document.querySelector('#result'),
+        connected: original.isConnected,
+        resultCount: document.querySelectorAll('#result').length,
+        labelCount: document.querySelectorAll('#total-label').length,
+        totalCount: document.querySelectorAll('#total-count').length,
+        liveRegions: Array.from(document.querySelectorAll('[aria-live], [role="status"], [role="alert"], [role="log"]'), (el) => el.id),
+        role: original.getAttribute('role'),
+        live: original.getAttribute('aria-live'),
+        atomic: original.getAttribute('aria-atomic')
+      })), {
+        sameNode: true, connected: true, resultCount: 1, labelCount: 1, totalCount: 1,
+        liveRegions: ['result'], role: 'status', live: 'polite', atomic: 'true'
+      });
+    };
+    await checkResult(0);
     // Wait for the actual transport and its welcome message before checking again.
     const deadline = Date.now() + 5000;
     while (io.engine.clientsCount === 0 && Date.now() < deadline) {
@@ -67,9 +87,8 @@ async function run() {
       assert.deepEqual(await page.locator('.stat').allTextContents(), expected);
       const counts = (await page.locator('.count').allTextContents()).map((text) => text.trim());
       assert.deepEqual(counts, [String(a), String(b)]);
-      assert.equal(await page.locator('#total-count').innerText(), String(a + b));
-      assert.equal(await page.locator('#total-label').innerText(), '总票数');
-      evidence.push({ a, b, before, datetime: stamp, visible: expectedVisible, after, percentages: expected });
+      await checkResult(a + b);
+      evidence.push({ a, b, total: a + b, sameResultNode: true, connected: true, role: 'status', live: 'polite', atomic: 'true', before, datetime: stamp, visible: expectedVisible, after, percentages: expected });
       previous = stamp;
     }
     for (const payload of ['{', '{}', '{"a":-1,"b":2}', '{"a":1.5,"b":2}', '{"a":3,"b":"1"}', '{"a":1e400,"b":0}', ['{"a":3,"b":1}'], { a: 3, b: 1 }]) io.emit('scores', payload);
@@ -78,6 +97,8 @@ async function run() {
     assert.equal(await page.locator('time#last-updated').getAttribute('datetime'), previous);
     assert.deepEqual(await page.locator('.stat').allTextContents(), ['67.0%', '33.0%']);
     await page.screenshot({ path: path.join(artifactDir, 'received.png') });
+    await checkResult(6);
+    await page.screenshot({ path: path.join(artifactDir, 'result-status.png'), fullPage: true });
     await page.reload();
     await page.waitForFunction(() => document.querySelector('#update-status').innerText.includes('等待实时数据'));
     await waiting();

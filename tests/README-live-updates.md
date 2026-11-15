@@ -15,7 +15,12 @@ The browser test starts its own HTTP/Socket.IO server on a loopback ephemeral
 port and serves the current `views` assets. It sends controlled `scores`
 samples only to that isolated server. Chromium checks actual DOM text, the
 unique `time#last-updated`, its ISO `datetime` and local visible time, asset
-requests, repeated messages, invalid messages and reload. Evidence and
+requests, repeated messages, invalid messages and reload. It also saves the
+original `#result` DOM reference and checks that zero and nonzero score events
+update its actual total in place, preserve `role="status"`, `aria-live="polite"`
+and `aria-atomic="true"`, and leave a single live region containing the visible
+Chinese total label and count. No test writes the asserted DOM text. A rendered
+page screenshot is saved as `result-status.png`. Evidence and
 screenshots go under `.local-checks/evidence/`, which is ignored by Git.
 The test closes its browser and server on success or failure.
 

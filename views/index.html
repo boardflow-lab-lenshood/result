@@ -39,7 +39,7 @@
           <span ng-if="lastUpdated">最近更新：<time id="last-updated" ng-attr-datetime="{{lastUpdated}}">{{lastUpdated | date:'medium'}}</time></span>
         </p>
       </div>
-      <div id="result">
+      <div id="result" role="status" aria-live="polite" aria-atomic="true">
         <span id="total-label">总票数</span>
         <span id="total-count">{{total}}</span>
       </div>
