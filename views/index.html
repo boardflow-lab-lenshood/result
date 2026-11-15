@@ -31,6 +31,10 @@
             <div class="stat">{{bPercent | number:1}}%</div>
           </div>
         </div>
+        <p id="update-status" ng-cloak>
+          <span ng-if="!lastUpdated">等待实时数据</span>
+          <span ng-if="lastUpdated">最近更新：<time id="last-updated" ng-attr-datetime="{{lastUpdated}}">{{lastUpdated | date:'medium'}}</time></span>
+        </p>
       </div>
     </div>
     <div id="result">
