@@ -175,7 +175,8 @@ async function main() {
       assert.deepStrictEqual(emptySummary.json, {
         counts: { a: 0, b: 0 },
         total: 0,
-        leader: null
+        leader: null,
+        percentages: { a: 0, b: 0 }
       });
       const emptyResults = await requestJson(port, '/api/results');
       assert.deepStrictEqual(emptyResults.json, { a: 0, b: 0 });
@@ -188,7 +189,8 @@ async function main() {
       assert.deepStrictEqual(leaderA.json, {
         counts: { a: 1, b: 0 },
         total: 1,
-        leader: 'a'
+        leader: 'a',
+        percentages: { a: 100, b: 0 }
       });
 
       await checkpoint('insert summary vote b', () => admin.query(
@@ -198,7 +200,8 @@ async function main() {
       assert.deepStrictEqual(tied.json, {
         counts: { a: 1, b: 1 },
         total: 2,
-        leader: null
+        leader: null,
+        percentages: { a: 50, b: 50 }
       });
       const tiedAgain = await requestJson(port, '/api/uat/result-summary');
       assert.deepStrictEqual(tiedAgain.json, tied.json);
@@ -212,7 +215,8 @@ async function main() {
       assert.deepStrictEqual(leaderB.json, {
         counts: { a: 1, b: 2 },
         total: 3,
-        leader: 'b'
+        leader: 'b',
+        percentages: { a: 33.3, b: 66.7 }
       });
       const resultsAfterSummary = await requestJson(port, '/api/results');
       assert.deepStrictEqual(resultsAfterSummary.json, { a: 1, b: 2 });
