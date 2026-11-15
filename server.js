@@ -151,6 +151,12 @@ function queryVoteCounts(callback) {
 function summarizeVoteCounts(votes) {
   var counts = {a: votes.a, b: votes.b};
   var total = counts.a + counts.b;
+  var percentages = {a: 0, b: 0};
+  if (total > 0) {
+    var roundedA = Math.round(counts.a * 1000 / total);
+    percentages.a = roundedA / 10;
+    percentages.b = (1000 - roundedA) / 10;
+  }
   var leader = null;
   if (counts.a > counts.b) {
     leader = 'a';
@@ -160,7 +166,8 @@ function summarizeVoteCounts(votes) {
   return {
     counts: counts,
     total: total,
-    leader: leader
+    leader: leader,
+    percentages: percentages
   };
 }
 
