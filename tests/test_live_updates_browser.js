@@ -81,7 +81,7 @@ async function run() {
     await page.waitForFunction(() => document.querySelector('#update-status').innerText.includes('等待实时数据'));
     await waiting();
     assert.equal(await page.locator('time#last-updated').count(), 0);
-    for (const file of ['/app.js', '/angular.min.js', '/socket.io/socket.io.js']) {
+    for (const file of ['/app.js', '/angular.min.js', '/socket.io.js']) {
       assert.ok(requests.some((request) => new URL(request.url).pathname === file && request.status === 200), file);
     }
     assert.deepEqual(errors, []);
