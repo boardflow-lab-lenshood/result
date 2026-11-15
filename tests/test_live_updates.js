@@ -80,7 +80,8 @@ test('invalid messages never change scores or generate/advance the receipt time'
     '{"a":"3","b":1}', '{"a":3,"b":"1"}',
     '{"a":null,"b":0}', '{"a":0,"b":false}',
     '{"a":1e400,"b":0}', '{"a":0,"b":1e400}',
-    '{"a":{},"b":0}', '{"a":0,"b":[]}'
+    '{"a":{},"b":0}', '{"a":0,"b":[]}',
+    ['{"a":3,"b":1}'], { a: 3, b: 1 }, null, undefined, 0, true
   ];
   const page = loadPage();
   for (const hasValidData of [false, true]) {

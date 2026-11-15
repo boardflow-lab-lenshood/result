@@ -40,6 +40,7 @@ async function run() {
     assert.equal(io.engine.clientsCount, 1);
     io.emit('message', { text: 'Welcome again!' });
     io.emit('scores', '{"a":"3","b":1}');
+    io.emit('scores', ['{"a":3,"b":1}']);
     await page.waitForTimeout(100);
     await waiting();
     const artifactDir = path.join(__dirname, '../.local-checks/evidence');
@@ -71,7 +72,7 @@ async function run() {
       evidence.push({ a, b, before, datetime: stamp, visible: expectedVisible, after, percentages: expected });
       previous = stamp;
     }
-    for (const payload of ['{', '{}', '{"a":-1,"b":2}', '{"a":1.5,"b":2}', '{"a":3,"b":"1"}', '{"a":1e400,"b":0}']) io.emit('scores', payload);
+    for (const payload of ['{', '{}', '{"a":-1,"b":2}', '{"a":1.5,"b":2}', '{"a":3,"b":"1"}', '{"a":1e400,"b":0}', ['{"a":3,"b":1}'], { a: 3, b: 1 }]) io.emit('scores', payload);
     io.emit('message', { text: 'Another welcome' });
     await page.waitForTimeout(100);
     assert.equal(await page.locator('time#last-updated').getAttribute('datetime'), previous);

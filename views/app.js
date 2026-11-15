@@ -15,6 +15,9 @@ app.controller('statsCtrl', function($scope){
   document.body.style.opacity = 1;
   socket.on('scores', function (json) {
     var receivedAt = new Date();
+    if (typeof json !== 'string') {
+      return;
+    }
     var data;
     try {
       data = JSON.parse(json);
