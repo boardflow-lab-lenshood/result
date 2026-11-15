@@ -153,7 +153,7 @@ function summarizeVoteCounts(votes) {
   var total = counts.a + counts.b;
   var percentages = {a: 0, b: 0};
   if (total > 0) {
-    var roundedA = Math.round(counts.a / total * 100 * 10);
+    var roundedA = Math.round(counts.a * 1000 / total);
     percentages.a = roundedA / 10;
     percentages.b = (1000 - roundedA) / 10;
   }

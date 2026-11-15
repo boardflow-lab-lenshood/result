@@ -103,6 +103,8 @@ const samples = [
   { counts: { a: 7, b: 7 }, percentages: { a: 50, b: 50 }, leader: null },
   // Independent rounding of b would incorrectly give 93.8 for this half-tenth case.
   { counts: { a: 1, b: 15 }, percentages: { a: 6.3, b: 93.7 }, leader: 'b' },
+  // Scale integer counts before division so 2.95% does not become 2.94999...%.
+  { counts: { a: 59, b: 1941 }, percentages: { a: 3, b: 97 }, leader: 'b' },
   { counts: { a: 0, b: 1 }, percentages: { a: 0, b: 100 }, leader: 'b' },
   { counts: { a: 1, b: 1 }, percentages: { a: 50, b: 50 }, leader: null }
 ];
