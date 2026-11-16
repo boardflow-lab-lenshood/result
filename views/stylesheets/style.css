@@ -9,9 +9,17 @@ html,body{
   height:100%;
   font-family: 'Open Sans';
 }
-body{
-  opacity:0;
-  transition: all 1s linear;
+[ng-cloak]{
+  display:none !important;
+}
+
+#realtime-status{
+  margin:16px 0 0;
+  padding:8px;
+  background:#fff;
+  color:#333;
+  font-size:16px;
+  line-height:1.5;
 }
 
 .divider{
@@ -45,6 +53,11 @@ body{
   display:table-cell;
   text-align:center;
   vertical-align:middle;
+}
+#content-container-center h1{
+  color: #3c3c3c;
+  font-size: 24px;
+  margin: 0 0 24px;
 }
 #result{
   z-index: 3;

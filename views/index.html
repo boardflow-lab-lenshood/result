@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="catsvsdogs">
+<html lang="zh-CN" ng-app="catsvsdogs">
   <head>
     <meta charset="utf-8">
     <title>猫派 vs 狗派 -- Result</title>
@@ -16,8 +16,9 @@
       --><div id="background-stats-2">
       </div>
     </div>
-    <div id="content-container">
+    <main id="content-container">
       <div id="content-container-center">
+        <h1>实时投票结果</h1>
         <div id="choice">
           <div class="choice cats">
             <div class="label">猫派</div>
@@ -31,12 +32,16 @@
             <div class="stat">{{bPercent | number:1}}%</div>
           </div>
         </div>
+        <p id="realtime-status" aria-live="polite">
+          <span ng-if="!lastUpdated">等待实时数据</span>
+          <span ng-if="lastUpdated" ng-cloak>最近更新：<time id="last-updated" ng-attr-datetime="{{lastUpdated}}">{{lastUpdatedText}}</time></span>
+        </p>
       </div>
-    </div>
-    <div id="result">
-      <span id="total-label">总票数</span>
-      <span id="total-count">{{total}}</span>
-    </div>
+      <div id="result">
+        <span id="total-label">总票数</span>
+        <span id="total-count">{{total}}</span>
+      </div>
+    </main>
     <script src="socket.io.js"></script>
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
