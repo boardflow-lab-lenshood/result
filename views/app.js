@@ -14,17 +14,18 @@ app.controller('statsCtrl', function($scope){
   socket.on('scores', function (json) {
     var receivedAt = new Date();
     var data;
+    var a;
+    var b;
     try {
       data = JSON.parse(json);
+      if (!data || typeof data !== 'object') {
+        return;
+      }
+      a = parseInt(data.a, 10);
+      b = parseInt(data.b, 10);
     } catch (error) {
       return;
     }
-    if (!data || typeof data !== 'object') {
-      return;
-    }
-
-    var a = parseInt(data.a, 10);
-    var b = parseInt(data.b, 10);
     if (!isFinite(a) || !isFinite(b) || a < 0 || b < 0) {
       return;
     }

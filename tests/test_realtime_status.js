@@ -90,7 +90,11 @@ test('identical counts received later advance the timestamp, elapsed time alone 
 
 test('invalid scores neither create nor replace a valid timestamp or totals, and recovery works', () => {
   const app = controller();
-  const invalid = ['not JSON', '{', 'null', '42', '[]', '{}', '{"a":"bad","b":1}', '{"a":1}', '{"a":null,"b":0}'];
+  const invalid = [
+    'not JSON', '{', 'null', '42', '[]', '{}',
+    '{"a":"bad","b":1}', '{"a":1}', '{"a":null,"b":0}',
+    '{"a":{"toString":null},"b":0}', '{"a":0,"b":{"toString":null}}'
+  ];
   for (const value of invalid) {
     assert.doesNotThrow(() => app.socket.emit('scores', value));
     assert.equal(app.scope.lastUpdated, undefined);
@@ -98,13 +102,19 @@ test('invalid scores neither create nor replace a valid timestamp or totals, and
   }
   app.scores({ a: 4, b: 2 });
   const last = app.scope.lastUpdated;
+  const lastText = app.scope.lastUpdatedText;
   app.advance(10000);
   for (const value of invalid) {
     assert.doesNotThrow(() => app.socket.emit('scores', value));
     assert.equal(app.scope.lastUpdated, last);
+    assert.equal(app.scope.lastUpdatedText, lastText);
     assert.equal(app.scope.total, 6);
     assert.equal(app.scope.aCount, 4);
     assert.equal(app.scope.bCount, 2);
+    assert.equal(app.scope.aPercent, 67);
+    assert.equal(app.scope.bPercent, 33);
+    assert.equal(app.backgrounds['background-stats-1'].style.width, '67%');
+    assert.equal(app.backgrounds['background-stats-2'].style.width, '33%');
   }
   app.scores({ a: 0, b: 0 });
   assert.equal(app.scope.lastUpdated, app.expectedISO());

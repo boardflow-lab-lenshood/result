@@ -13,6 +13,7 @@ const root = path.resolve(__dirname, '..');
 process.env.PLAYWRIGHT_BROWSERS_PATH = path.join(root, '.cache/ms-playwright');
 const { chromium, expect } = require('@playwright/test');
 const artifacts = path.join(root, 'test-results/realtime');
+const conversionFailures = ['{"a":{"toString":null},"b":0}', '{"a":0,"b":{"toString":null}}'];
 
 async function startFixture() {
   const app = express();
@@ -125,8 +126,10 @@ test('real Chromium: local result page receives isolated scores and preserves re
     fixture.emit('scores', 'not JSON');
     fixture.emit('scores', 'null');
     fixture.emit('scores', '{"a":"bad","b":0}');
+    for (const bad of conversionFailures) fixture.emit('scores', bad);
     await page.waitForTimeout(150);
     await assertWaiting(page);
+    assert.deepEqual(errors, [], 'invalid scores before valid data must not throw');
     await page.screenshot({ path: path.join(artifacts, 'connected-waiting.png'), fullPage: true, animations: 'disabled' });
   });
 
@@ -161,12 +164,15 @@ test('real Chromium: local result page receives isolated scores and preserves re
 
   await t.test('elapsed time and invalid messages retain the last good data; identical scores advance time', async () => {
     const previous = await page.locator('#last-updated').getAttribute('datetime');
+    const previousText = await page.locator('#last-updated').textContent();
     await page.waitForTimeout(1100);
     fixture.emit('message', { text: 'Welcome!' });
-    for (const bad of ['{', 'null', '{}', '{"a":4,"b":"bad"}']) fixture.emit('scores', bad);
+    for (const bad of ['{', 'null', '{}', '{"a":4,"b":"bad"}', ...conversionFailures]) fixture.emit('scores', bad);
     await page.waitForTimeout(150);
     await expect(page.locator('#last-updated')).toHaveAttribute('datetime', previous);
+    await expect(page.locator('#last-updated')).toHaveText(previousText);
     await assertStatistics(page, 4, 2, 67, 33);
+    assert.deepEqual(errors, [], 'invalid scores after valid data must not throw');
     const next = await scores(4, 2, 67, 33);
     assert.ok(Date.parse(next) > Date.parse(previous));
   });
