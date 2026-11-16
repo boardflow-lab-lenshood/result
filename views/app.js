@@ -11,33 +11,38 @@ app.controller('statsCtrl', function($scope){
   $scope.bCount = 0;
   $scope.total = 0;
 
-  var updateScores = function(){
-    socket.on('scores', function (json) {
-       data = JSON.parse(json);
-       var a = parseInt(data.a || 0);
-       var b = parseInt(data.b || 0);
+  socket.on('scores', function (json) {
+    var receivedAt = new Date();
+    var data;
+    try {
+      data = JSON.parse(json);
+    } catch (error) {
+      return;
+    }
+    if (!data || typeof data !== 'object') {
+      return;
+    }
 
-       var percentages = getPercentages(a, b);
+    var a = parseInt(data.a, 10);
+    var b = parseInt(data.b, 10);
+    if (!isFinite(a) || !isFinite(b) || a < 0 || b < 0) {
+      return;
+    }
 
-       bg1.style.width = percentages.a + "%";
-       bg2.style.width = percentages.b + "%";
+    var percentages = getPercentages(a, b);
 
-       $scope.$apply(function () {
-         $scope.aPercent = percentages.a;
-         $scope.bPercent = percentages.b;
-         $scope.aCount = a;
-         $scope.bCount = b;
-         $scope.total = a + b;
-       });
+    bg1.style.width = percentages.a + "%";
+    bg2.style.width = percentages.b + "%";
+
+    $scope.$apply(function () {
+      $scope.aPercent = percentages.a;
+      $scope.bPercent = percentages.b;
+      $scope.aCount = a;
+      $scope.bCount = b;
+      $scope.total = a + b;
+      $scope.lastUpdated = receivedAt.toISOString();
+      $scope.lastUpdatedText = receivedAt.toLocaleString();
     });
-  };
-
-  var init = function(){
-    document.body.style.opacity=1;
-    updateScores();
-  };
-  socket.on('message',function(data){
-    init();
   });
 });
 
