@@ -32,6 +32,10 @@
             <div class="stat">{{bPercent | number:1}}%</div>
           </div>
         </div>
+        <p id="realtime-status" aria-live="polite">
+          <span ng-if="!lastUpdated">等待实时数据</span>
+          <span ng-if="lastUpdated" ng-cloak>最近更新：<time id="last-updated" ng-attr-datetime="{{lastUpdated}}">{{lastUpdatedText}}</time></span>
+        </p>
       </div>
       <div id="result">
         <span id="total-label">总票数</span>
