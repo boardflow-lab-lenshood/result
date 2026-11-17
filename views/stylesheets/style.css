@@ -46,6 +46,12 @@ body{
   text-align:center;
   vertical-align:middle;
 }
+.results-heading{
+  margin:0 0 24px;
+  color:#152d3a;
+  font-size:32px;
+  line-height:1.3;
+}
 #result{
   z-index: 3;
   position: absolute;
@@ -114,4 +120,17 @@ body{
   margin-bottom:-4px;
   width:50%;
   height:100%;
+}
+
+@media (max-width:500px){
+  .results-heading{
+    font-size:24px;
+  }
+  #choice{
+    width:calc(100vw - 40px);
+    font-size:28px;
+  }
+  #choice .choice{
+    padding-left:20px;
+  }
 }
