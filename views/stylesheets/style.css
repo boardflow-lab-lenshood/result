@@ -56,6 +56,13 @@ body{
   font-size: 45px;
   font-weight: 600;
 }
+#results-heading{
+  margin:0 0 24px;
+  color:#fff;
+  font-size:32px;
+  font-weight:600;
+  line-height:1.3;
+}
 #choice{
   transition: all 300ms linear;
   line-height:1.3em;
