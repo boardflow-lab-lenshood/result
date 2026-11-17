@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:result-status": "node tests/test_result_accessibility_browser.js"
   },
   "author": "",
   "license": "MIT",
@@ -16,5 +17,8 @@
     "pg": "^8.8.0",
     "socket.io": "^4.7.2",
     "stoppable": "^1.1.0"
+  },
+  "devDependencies": {
+    "playwright": "1.58.2"
   }
 }
