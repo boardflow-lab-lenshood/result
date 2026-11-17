@@ -23,14 +23,15 @@ function checkpoint(label, work) {
   });
 }
 
-function requestJson(port, pathName) {
-  return checkpoint('GET ' + pathName + ' :' + port, () => new Promise((resolve, reject) => {
+function requestJson(port, pathName, body) {
+  const method = body === undefined ? 'GET' : 'POST';
+  return checkpoint(method + ' ' + pathName + ' :' + port, () => new Promise((resolve, reject) => {
     const req = http.request({
       hostname: '127.0.0.1',
       port,
       path: pathName,
-      method: 'GET',
-      headers: { connection: 'close' }
+      method,
+      headers: { connection: 'close', 'content-type': 'text/plain;charset=UTF-8' }
     }, (res) => {
       const chunks = [];
       res.on('data', (chunk) => chunks.push(chunk));
@@ -46,8 +47,37 @@ function requestJson(port, pathName) {
       });
     });
     req.on('error', reject);
-    req.end();
+    req.end(body);
   }));
+}
+
+async function assertScores(port, counts) {
+  const transportPath = '/socket.io/?EIO=4&transport=polling';
+  const opened = await requestJson(port, transportPath);
+  assert.strictEqual(opened.status, 200);
+  assert.strictEqual(opened.body[0], '0');
+  const session = JSON.parse(opened.body.slice(1));
+  const sessionPath = transportPath + '&sid=' + encodeURIComponent(session.sid);
+  try {
+    const connected = await requestJson(port, sessionPath, '40');
+    assert.strictEqual(connected.status, 200);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const polled = await requestJson(port, sessionPath);
+      assert.strictEqual(polled.status, 200);
+      for (const packet of polled.body.split('\x1e')) {
+        if (!packet.startsWith('42')) continue;
+        const event = JSON.parse(packet.slice(2));
+        if (event[0] !== 'scores') continue;
+        assert.strictEqual(event.length, 2);
+        assert.strictEqual(typeof event[1], 'string');
+        assert.deepStrictEqual(JSON.parse(event[1]), counts);
+        return;
+      }
+    }
+    throw new Error('Socket.IO scores event was not received');
+  } finally {
+    await requestJson(port, sessionPath, '1');
+  }
 }
 
 function startChild(databaseUrl) {
@@ -169,53 +199,46 @@ async function main() {
 
     await checkpoint('truncate votes before summary', () => admin.query('TRUNCATE votes'));
     await withServer(databaseUrl, async (port) => {
-      const emptySummary = await requestJson(port, '/api/uat/result-summary');
-      assert.strictEqual(emptySummary.status, 200);
-      assert.ok(String(emptySummary.contentType).includes('application/json'));
-      assert.deepStrictEqual(emptySummary.json, {
-        counts: { a: 0, b: 0 },
-        total: 0,
-        leader: null
-      });
-      const emptyResults = await requestJson(port, '/api/results');
-      assert.deepStrictEqual(emptyResults.json, { a: 0, b: 0 });
-
-      await checkpoint('insert summary vote a', () => admin.query(
-        "INSERT INTO votes (id, vote) VALUES ('summary-a', 'a')"
-      ));
-      const leaderA = await requestJson(port, '/api/uat/result-summary');
-      assert.strictEqual(leaderA.status, 200);
-      assert.deepStrictEqual(leaderA.json, {
-        counts: { a: 1, b: 0 },
-        total: 1,
-        leader: 'a'
-      });
-
-      await checkpoint('insert summary vote b', () => admin.query(
-        "INSERT INTO votes (id, vote) VALUES ('summary-b', 'b')"
-      ));
-      const tied = await requestJson(port, '/api/uat/result-summary');
-      assert.deepStrictEqual(tied.json, {
-        counts: { a: 1, b: 1 },
-        total: 2,
-        leader: null
-      });
-      const tiedAgain = await requestJson(port, '/api/uat/result-summary');
-      assert.deepStrictEqual(tiedAgain.json, tied.json);
-      const tiedResults = await requestJson(port, '/api/results');
-      assert.deepStrictEqual(tiedResults.json, { a: 1, b: 1 });
-
-      await checkpoint('insert second summary vote b', () => admin.query(
-        "INSERT INTO votes (id, vote) VALUES ('summary-b2', 'b')"
-      ));
-      const leaderB = await requestJson(port, '/api/uat/result-summary');
-      assert.deepStrictEqual(leaderB.json, {
-        counts: { a: 1, b: 2 },
-        total: 3,
-        leader: 'b'
-      });
-      const resultsAfterSummary = await requestJson(port, '/api/results');
-      assert.deepStrictEqual(resultsAfterSummary.json, { a: 1, b: 2 });
+      const cases = [
+        { counts: { a: 0, b: 0 }, total: 0, leader: null, percentages: { a: 0, b: 0 } },
+        { counts: { a: 3, b: 1 }, total: 4, leader: 'a', percentages: { a: 75, b: 25 } },
+        { counts: { a: 1, b: 2 }, total: 3, leader: 'b', percentages: { a: 33.3, b: 66.7 } },
+        { counts: { a: 1, b: 0 }, total: 1, leader: 'a', percentages: { a: 100, b: 0 } },
+        { counts: { a: 7, b: 7 }, total: 14, leader: null, percentages: { a: 50, b: 50 } },
+        { counts: { a: 1, b: 15 }, total: 16, leader: 'b', percentages: { a: 6.3, b: 93.7 } },
+        { counts: { a: 0, b: 1 }, total: 1, leader: 'b', percentages: { a: 0, b: 100 } },
+        { counts: { a: 1, b: 1 }, total: 2, leader: null, percentages: { a: 50, b: 50 } },
+        { counts: { a: 2, b: 1 }, total: 3, leader: 'a', percentages: { a: 66.7, b: 33.3 } }
+      ];
+      for (const expected of cases) {
+        await checkpoint('seed summary counts ' + JSON.stringify(expected.counts), async () => {
+          await admin.query('TRUNCATE votes');
+          for (const vote of ['a', 'b']) {
+            for (let n = 0; n < expected.counts[vote]; n++) {
+              await admin.query('INSERT INTO votes (id, vote) VALUES ($1, $2)', [vote + n, vote]);
+            }
+          }
+        });
+        const summary = await requestJson(port, '/api/uat/result-summary');
+        assert.strictEqual(summary.status, 200);
+        assert.ok(String(summary.contentType).includes('application/json'));
+        assert.deepStrictEqual(summary.json, expected);
+        assert.strictEqual(summary.json.percentages.a + summary.json.percentages.b,
+          expected.total === 0 ? 0 : 100);
+        for (const value of Object.values(summary.json.percentages)) {
+          assert.strictEqual(typeof value, 'number');
+          assert.ok(Number.isFinite(value));
+          assert.match(String(value), /^\d+(?:\.\d)?$/);
+        }
+        const repeated = await requestJson(port, '/api/uat/result-summary');
+        assert.strictEqual(repeated.status, 200);
+        assert.deepStrictEqual(repeated.json, summary.json);
+        const results = await requestJson(port, '/api/results');
+        assert.strictEqual(results.status, 200);
+        assert.deepStrictEqual(results.json, expected.counts);
+        await assertScores(port, expected.counts);
+        console.log('summary fixture passed: ' + JSON.stringify(summary.json));
+      }
       const home = await requestJson(port, '/');
       assert.strictEqual(home.status, 200);
       assert.ok(home.body.includes('id="count-a"'));
@@ -241,6 +264,8 @@ async function main() {
         error: 'database_unavailable',
         service: 'result'
       });
+      assert.strictEqual(failed.body, '{"error":"database_unavailable","service":"result"}');
+      assert.strictEqual(failedSummary.body, '{"error":"database_unavailable","service":"result"}');
       assert.ok(output().includes('Failed to read result summary'));
     });
   } finally {

@@ -157,10 +157,17 @@ function summarizeVoteCounts(votes) {
   } else if (counts.b > counts.a) {
     leader = 'b';
   }
+  var percentages = {a: 0, b: 0};
+  if (total > 0) {
+    var aTenths = Math.round(counts.a * 1000 / total);
+    percentages = {a: aTenths / 10, b: (1000 - aTenths) / 10};
+  }
+
   return {
     counts: counts,
     total: total,
-    leader: leader
+    leader: leader,
+    percentages: percentages
   };
 }
 
