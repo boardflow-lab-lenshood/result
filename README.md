@@ -1,6 +1,35 @@
 # Result
 
-Results UI. Existing routes are unchanged:
+Results UI. The page has one heading, `实时投票结果`, above the live scores.
+
+## Page tests
+
+Requires Node.js 18+ and npm. From the result repository:
+
+```sh
+npm ci
+npm test
+```
+
+`npm test` runs `node --test tests/page.test.js`. It parses the page with the
+HTML5 parser `parse5` to check the unique native h1, exact text and order before
+`#choice`, the original document title, option labels, count/percentage/total
+bindings, and script initialization order. It also executes the existing
+`app.js` with Angular and Socket.IO test doubles to check message initialization,
+successive score updates, totals, and the existing zero-vote percentage rule.
+No server, database, browser, or shared-data changes are required.
+
+These tests do not measure browser visibility or layout and do not replace
+Chromium acceptance on the current batch deployment. After initialization and
+the opacity transition complete, that check must confirm the h1 is visible above
+the score region without overlap or clipping, and that the original title,
+labels, counts, one-decimal percentages, and total render correctly using the
+current shared counts. Record the deployment URL, batch/candidate or commit,
+verification time, and actual DOM/layout/count assertions.
+
+## Routes
+
+Existing routes are unchanged:
 
 - `GET /` serves the results page.
 - `GET /healthz` reports PostgreSQL readiness.

@@ -46,6 +46,12 @@ body{
   text-align:center;
   vertical-align:middle;
 }
+#content-container-center h1{
+  margin:0 0 24px;
+  color:#fff;
+  font-size:32px;
+  line-height:1.3;
+}
 #result{
   z-index: 3;
   position: absolute;
