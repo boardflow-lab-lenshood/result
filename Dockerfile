@@ -6,7 +6,7 @@ WORKDIR /usr/local/app
 
 COPY package*.json ./
 
-RUN npm ci && \
+RUN npm ci --omit=dev && \
  npm cache clean --force && \
  mv /usr/local/app/node_modules /node_modules
 
